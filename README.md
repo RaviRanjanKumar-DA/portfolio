@@ -35,8 +35,5 @@ This portfolio includes the following sections:
 - Adaptability and Continuous Learning  
 - Leadership and Ownership Mindset  
 
-## 🔗 Live Portfolio
-
-
-## Link -- https://raviranjankumar-da.github.io/portfolio/
+## 🔗 Live Portfolio --  https://raviranjankumar-da.github.io/portfolio/
 
