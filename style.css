@@ -19,6 +19,33 @@ header nav a {
   font-weight: bold;
 }
 
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.skills-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.skills-list img {
+  width: 32px;
+  height: 32px;
+}
+
 section {
   padding: 20px;
 }
