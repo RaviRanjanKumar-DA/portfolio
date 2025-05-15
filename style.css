@@ -61,7 +61,7 @@ footer {
 }
 
 
-   .container {
+container {
        display: flex; /* Enables flexbox layout */
        justify-content: center; /* Centers horizontally */
        align-items: center; /* Centers vertically */
