@@ -61,10 +61,10 @@ footer {
 }
 
 
-container {
-       display: flex; /* Enables flexbox layout */
-       justify-content: center; /* Centers horizontally */
-       align-items: center; /* Centers vertically */
-       min-height: 10vh; /* Makes the container cover the entire viewport height */
-   }
+header {
+  background-color: #7b7896;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
 
