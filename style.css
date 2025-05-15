@@ -59,3 +59,12 @@ footer {
   padding: 10px;
   background-color: #e0e0e0;
 }
+
+
+   .container {
+       display: flex; /* Enables flexbox layout */
+       justify-content: center; /* Centers horizontally */
+       align-items: center; /* Centers vertically */
+       min-height: 10vh; /* Makes the container cover the entire viewport height */
+   }
+
