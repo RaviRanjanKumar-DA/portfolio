@@ -182,30 +182,60 @@
 
 
 <section id="Connect Form Link">
-  <container><script src='https://forms.pabbly.com/embed/Q38X-722613000?w=550'></script></container>
+  <container></container>
 </section>
 
 
     <p>=========================================================================================================================================================</p>
 
 <!-- Contact Section -->
-<section class="contact-section">
-  <div class="container">
-    <h2>Connect With Me!</h2>
-    <p>Please connect with me for more details.</p>
-    <hr />
-    <form class="contact-form">
-      <div class="row">
-      <input type="text" placeholder="Name" required />
-      <input type="text" placeholder="Organization Name" required />
-      <input type="email" placeholder="Email" required />
-      <input type="tel" placeholder="Contact Number" required />
-      <textarea placeholder="Write your message" rows="5" required></textarea>
-      </div>
-      <button type="submit">Submit</button>
-    </form>
+<form class="contact-form" id="contact-form">
+  <div class="row">
+    <input type="text" name="firstName" placeholder="First Name" required />
+    <input type="text" name="lastName" placeholder="Last Name" required />
   </div>
-</section>
+  <input type="text" name="organization" placeholder="Organization Name" required />
+  <input type="email" name="email" placeholder="Email" required />
+  <input type="tel" name="contact" placeholder="Contact Number" required />
+  <textarea name="message" placeholder="Write your message" rows="5" required></textarea>
+  <button type="submit">Submit</button>
+</form>
+
+<!-- Success message -->
+<p id="responseMsg" style="color: green; display: none;">Thank you! Your response has been recorded.</p>
+
+<script>
+  const form = document.getElementById("contact-form");
+  const responseMsg = document.getElementById("responseMsg");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const jsonData = {};
+    formData.forEach((value, key) => {
+      jsonData[key] = value;
+    });
+
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxNUz32ZNDwxpwxq3zGxWiwtrDiOMVRB_HTQVz5JFcGWZ8vxasn88P21G94w06aCpc/exec";
+
+    try {
+      const res = await fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify(jsonData),
+        headers: { "Content-Type": "application/json" }
+      });
+
+      if (res.ok) {
+        responseMsg.style.display = "block";
+        form.reset();
+      }
+    } catch (err) {
+      alert("There was an error submitting the form.");
+      console.error(err);
+    }
+  });
+</script>
 
     <p>=========================================================================================================================================================</p>
 
