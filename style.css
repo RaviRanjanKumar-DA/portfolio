@@ -61,10 +61,10 @@ footer {
 }
 
 
-.container {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  margin-bottom: 10px;
+container {
+  background-color: #7b7896;
+  color: white;
+  padding: 20px;
+  text-align: center;
 }
 
