@@ -704,61 +704,58 @@
   <script src="script.js"></script>
   <script>
     /* ══════════════════════════════════════════════════════════════════
-       Contact Form — Vercel Serverless API
-       Endpoint: https://YOUR-VERCEL-APP.vercel.app/api/contact
-       Replace the API_URL below with your actual Vercel deployment URL
-       after deploying the vercel-contact-api project.
+       Contact Form — Web3Forms API
+       Key: 89de67e7-2d9f-4bf5-80ff-5013598e2a12
+       Docs: https://docs.web3forms.com
        ══════════════════════════════════════════════════════════════════ */
     (function () {
       const form    = document.getElementById("contactForm");
       const btn     = document.getElementById("submitBtn");
       const success = document.getElementById("formSuccess");
-      const error   = document.getElementById("formError");
-
-      // ← UPDATE THIS URL after deploying to Vercel
-      const API_URL = "https://YOUR-VERCEL-APP.vercel.app/api/contact";
+      const errMsg  = document.getElementById("formError");
 
       form.addEventListener("submit", async function (e) {
         e.preventDefault();
 
-        /* Reset feedback */
+        /* Reset banners */
         success.style.display = "none";
-        error.style.display   = "none";
+        errMsg.style.display  = "none";
 
         /* Loading state */
         const origHTML = btn.innerHTML;
         btn.disabled   = true;
         btn.innerHTML  = '<i class="fas fa-spinner fa-spin"></i>&nbsp; Sending…';
 
-        /* Collect form data */
-        const data = {};
-        new FormData(form).forEach((v, k) => { data[k] = v.trim(); });
-        // Remove hidden fields not needed by API
-        delete data.access_key;
-        delete data.from_name;
-        delete data.subject;
-        delete data.botcheck;
+        /* Build payload — include Web3Forms fields from hidden inputs */
+        const payload = Object.fromEntries(new FormData(form));
 
         try {
-          const res  = await fetch(API_URL, {
+          const res  = await fetch("https://api.web3forms.com/submit", {
             method:  "POST",
             headers: { "Content-Type": "application/json", "Accept": "application/json" },
-            body:    JSON.stringify(data)
+            body:    JSON.stringify(payload)
           });
-          const json = await res.json();
+          const data = await res.json();
 
-          if (res.ok && json.success) {
+          if (data.success) {
             success.style.display = "flex";
             form.reset();
           } else {
-            throw new Error(json.error || "Server error");
+            /* Show exact API error so we can debug */
+            throw new Error(data.message || "Web3Forms returned non-success");
           }
+
         } catch (err) {
-          console.error("Form error:", err);
-          error.style.display = "flex";
+          console.error("Form submit error:", err.message);
+          errMsg.style.display = "flex";
+          /* Update error text with actual reason */
+          errMsg.innerHTML = '<i class="fas fa-triangle-exclamation"></i>&nbsp;'
+            + (err.message.includes("fetch")
+                ? 'Network error — please email <a href="mailto:ravikumar.inbh@gmail.com">ravikumar.inbh@gmail.com</a>'
+                : err.message + ' — please check your email inbox for a Web3Forms confirmation link.');
         } finally {
-          btn.disabled   = false;
-          btn.innerHTML  = origHTML;
+          btn.disabled  = false;
+          btn.innerHTML = origHTML;
         }
       });
     })();
