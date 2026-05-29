@@ -619,23 +619,19 @@
           </div>
         </div>
 
-        <!-- ══ Contact Form — FormSubmit.co (native POST, zero CORS) ══
-             How it works:
-             1. Form submits natively to FormSubmit (no JavaScript fetch)
-             2. First submission → FormSubmit emails you an activation link
-             3. Click "Activate Form" → every future submit lands in Gmail
-             4. _next redirects visitor back to this page after submitting
-        ════════════════════════════════════════════════════════════ -->
-        <form class="cform reveal" id="contactForm"
-              action="https://formsubmit.co/ravikumar.inbh@gmail.com"
-              method="POST">
+        <!-- ══ Contact Form — Web3Forms (AJAX, Cloudflare-hosted, zero CORS) ══
+             Powered by: https://web3forms.com
+             Delivers every submission directly to ravikumar.inbh@gmail.com
+             No activation email · No server · 250 free submissions/month
+        ════════════════════════════════════════════════════════════════ -->
+        <form class="cform reveal" id="contactForm">
 
-          <!-- FormSubmit configuration (hidden) -->
-          <input type="hidden" name="_subject"  value="📩 New Portfolio Enquiry">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_captcha"  value="false">
-          <input type="hidden" name="_next"
-                 value="https://raviranjankumar-da.github.io/portfolio/thanks.html">
+          <!-- Web3Forms access key (replace WEB3FORMS_KEY with your actual key) -->
+          <input type="hidden" name="access_key" value="89de67e7-2d9f-4bf5-80ff-5013598e2a12"/>
+          <!-- Email customisation -->
+          <input type="hidden" name="from_name"  value="Portfolio Contact Form"/>
+          <input type="hidden" name="subject"    value="📩 New Portfolio Enquiry"/>
+          <input type="hidden" name="botcheck"   value="" style="display:none"/>
 
           <div class="fg">
             <label>Your Name</label>
@@ -663,6 +659,15 @@
           <button type="submit" class="btn btn-primary" id="submitBtn" style="width:100%">
             <i class="fas fa-paper-plane"></i> Send Message
           </button>
+          <p id="formSuccess" class="fsuccess">
+            <i class="fas fa-circle-check"></i>
+            Message sent! I'll get back to you within 24 hours.
+          </p>
+          <p id="formError" class="ferror">
+            <i class="fas fa-triangle-exclamation"></i>
+            Something went wrong. Please email me at
+            <a href="mailto:ravikumar.inbh@gmail.com">ravikumar.inbh@gmail.com</a>
+          </p>
         </form>
 
       </div>
@@ -698,14 +703,65 @@
 
   <script src="script.js"></script>
   <script>
-    /* ── Contact form: show spinner on submit (native POST, no fetch) ── */
-    document.getElementById("contactForm")
-      .addEventListener("submit", function () {
-        const btn = document.getElementById("submitBtn");
-        btn.disabled  = true;
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>&nbsp; Sending…';
-        /* Form submits natively to FormSubmit.co — no e.preventDefault() */
+    /* ══════════════════════════════════════════════════════════════════
+       Contact Form — Vercel Serverless API
+       Endpoint: https://YOUR-VERCEL-APP.vercel.app/api/contact
+       Replace the API_URL below with your actual Vercel deployment URL
+       after deploying the vercel-contact-api project.
+       ══════════════════════════════════════════════════════════════════ */
+    (function () {
+      const form    = document.getElementById("contactForm");
+      const btn     = document.getElementById("submitBtn");
+      const success = document.getElementById("formSuccess");
+      const error   = document.getElementById("formError");
+
+      // ← UPDATE THIS URL after deploying to Vercel
+      const API_URL = "https://YOUR-VERCEL-APP.vercel.app/api/contact";
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        /* Reset feedback */
+        success.style.display = "none";
+        error.style.display   = "none";
+
+        /* Loading state */
+        const origHTML = btn.innerHTML;
+        btn.disabled   = true;
+        btn.innerHTML  = '<i class="fas fa-spinner fa-spin"></i>&nbsp; Sending…';
+
+        /* Collect form data */
+        const data = {};
+        new FormData(form).forEach((v, k) => { data[k] = v.trim(); });
+        // Remove hidden fields not needed by API
+        delete data.access_key;
+        delete data.from_name;
+        delete data.subject;
+        delete data.botcheck;
+
+        try {
+          const res  = await fetch(API_URL, {
+            method:  "POST",
+            headers: { "Content-Type": "application/json", "Accept": "application/json" },
+            body:    JSON.stringify(data)
+          });
+          const json = await res.json();
+
+          if (res.ok && json.success) {
+            success.style.display = "flex";
+            form.reset();
+          } else {
+            throw new Error(json.error || "Server error");
+          }
+        } catch (err) {
+          console.error("Form error:", err);
+          error.style.display = "flex";
+        } finally {
+          btn.disabled   = false;
+          btn.innerHTML  = origHTML;
+        }
       });
+    })();
   </script>
 </body>
 </html>
