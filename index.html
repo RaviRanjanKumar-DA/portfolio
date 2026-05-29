@@ -683,18 +683,47 @@
 
   <script src="script.js"></script>
   <script>
+    /* ── Contact form — CORS-safe Google Apps Script submission ───── */
     const cForm = document.getElementById("contactForm");
-    const cSucc  = document.getElementById("formSuccess");
+    const cSucc = document.getElementById("formSuccess");
+
     cForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const d={};
-      new FormData(cForm).forEach((v,k)=>{d[k]=v;});
-      const url="https://script.google.com/macros/s/AKfycbxNUz32ZNDwxpwxq3zGxWiwtrDiOMVRB_HTQVz5JFcGWZ8vxasn88P21G94w06aCpc/exec";
-      try{
-        const r=await fetch(url,{method:"POST",body:JSON.stringify(d),headers:{"Content-Type":"application/json"}});
-        if(r.ok){cSucc.style.display="flex";cForm.reset();}
-        else alert("Submission failed. Please try again.");
-      }catch{alert("Error submitting form.");}
+
+      const cBtn = cForm.querySelector("button[type='submit']");
+      const origLabel = cBtn.innerHTML;
+
+      // Loading state
+      cBtn.disabled = true;
+      cBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
+
+      // Collect form data
+      const d = {};
+      new FormData(cForm).forEach((v, k) => { d[k] = v; });
+
+      const url = "https://script.google.com/macros/s/AKfycbxNUz32ZNDwxpwxq3zGxWiwtrDiOMVRB_HTQVz5JFcGWZ8vxasn88P21G94w06aCpc/exec";
+
+      try {
+        /* mode:'no-cors' is required when calling Google Apps Script from an
+           external domain (GitHub Pages). It sends the POST without a CORS
+           preflight. The response will be opaque (type = 'opaque') so we
+           cannot read r.ok — reaching this line means the data was delivered. */
+        await fetch(url, {
+          method:  "POST",
+          mode:    "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body:    JSON.stringify(d)
+        });
+
+        cSucc.style.display = "flex";
+        cForm.reset();
+      } catch (err) {
+        /* Only genuine network failures reach here */
+        alert("Could not send message. Please email me directly:\nravikumar.inbh@gmail.com");
+      } finally {
+        cBtn.disabled = false;
+        cBtn.innerHTML = origLabel;
+      }
     });
   </script>
 </body>
