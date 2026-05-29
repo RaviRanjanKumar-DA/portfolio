@@ -1,279 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ravi Ranjan Kumar | Data & Business Operations Analyst</title>
-  <meta name="description" content="Portfolio of Ravi Ranjan Kumar — Data Analyst, CRM & Automation Specialist, Power BI Expert based in New Delhi, India.">
-  <link rel="stylesheet" href="style.css"/>
+  <meta name="description" content="Ravi Ranjan Kumar — Data Analyst, CRM Automation Specialist & Business Operations Analyst. Power BI | SQL | n8n | Metabase | TeleCRM | New Delhi, India."/>
+  <meta name="keywords" content="Data Analyst, CRM Automation, Power BI, SQL, n8n, Pabbly, Metabase, Business Operations, Sales Analytics"/>
+  <title>Ravi Ranjan Kumar | Data Analyst &amp; CRM Automation Specialist</title>
+
+  <!-- Google Fonts: Poppins + Inter + JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-  <!-- ══ STICKY TOP NAV ══════════════════════════════════════════════════ -->
-  <nav class="top-nav" id="topNav">
-    <div class="nav-brand">RRK</div>
-    <div class="nav-links" id="navLinks">
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#experience">Experience</a>
-      <a href="#achievements">Achievements</a>
-      <a href="#projects">Projects</a>
-      <a href="#education">Education</a>
-      <a href="#resume">Resume</a>
-      <a href="#contact">Contact</a>
+  <!-- ═══ BACKGROUND CANVAS ════════════════════════════════════════════ -->
+  <canvas id="networkCanvas" class="bg-canvas"></canvas>
+
+  <!-- ═══ NAVBAR ════════════════════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">
+        <span class="logo-b">&lt;</span>RRK<span class="logo-b">/&gt;</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#achievements">Achievements</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li>
+          <a href="https://drive.google.com/file/d/1fUoULa-MsDVAhEfkr2cplxpBVZh5RPG0/view?usp=drive_link"
+             target="_blank" class="nav-cta">
+            <i class="fas fa-download"></i> Resume
+          </a>
+        </li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <div class="nav-toggle" id="navToggle">&#9776;</div>
   </nav>
 
-  <!-- ══ HERO ════════════════════════════════════════════════════════════ -->
-  <header class="hero" id="home">
-    <div class="hero-content">
-      <img src="profile.jpg" alt="Ravi Ranjan Kumar" class="profile-pic"/>
-      <div class="hero-badge">🟢 Open to Opportunities</div>
-      <h1>Ravi Ranjan Kumar</h1>
-      <div class="hero-tagline">
-        <span id="typedText"></span><span class="cursor">|</span>
+  <!-- ═══ HERO ══════════════════════════════════════════════════════════ -->
+  <section id="hero" class="hero">
+
+    <!-- Floating analytics decorations -->
+    <div class="hero-deco" aria-hidden="true">
+      <div class="deco-card dc1">
+        <div class="dc-label">Sales Productivity</div>
+        <div class="dc-bars">
+          <div class="dc-bar" style="width:85%;background:#3b82f6"></div>
+          <div class="dc-bar" style="width:62%;background:#06b6d4"></div>
+          <div class="dc-bar" style="width:91%;background:#10b981"></div>
+        </div>
+        <div class="dc-metric" style="color:#10b981">↑ 40%</div>
       </div>
-      <p class="hero-sub">SQL &nbsp;·&nbsp; Power BI &nbsp;·&nbsp; CRM Automation &nbsp;·&nbsp; n8n &nbsp;·&nbsp; Metabase &nbsp;·&nbsp; Python</p>
-      <p class="hero-contact">
-        <a href="mailto:ravikumar.inbh@gmail.com">✉ ravikumar.inbh@gmail.com</a>
-        &nbsp;|&nbsp; 📞 +91 8851015209 &nbsp;|&nbsp; 📍 New Delhi, India
-      </p>
-      <div class="hero-btns">
-        <a href="#contact" class="btn btn-primary">Get In Touch</a>
-        <a href="https://drive.google.com/file/d/1fUoULa-MsDVAhEfkr2cplxpBVZh5RPG0/view?usp=drive_link" class="btn btn-outline" target="_blank">📄 Download CV</a>
-        <a href="https://github.com/RaviRanjanKumar-DA" class="btn btn-outline" target="_blank">GitHub</a>
-        <a href="https://www.linkedin.com/in/ravi-ranjan-data-analyst/" class="btn btn-outline" target="_blank">LinkedIn</a>
+      <div class="deco-card dc2">
+        <div class="dc-label">BI Dashboards</div>
+        <div class="dc-donut-wrap">
+          <svg viewBox="0 0 60 60" class="dc-donut">
+            <circle cx="30" cy="30" r="22" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="8"/>
+            <circle cx="30" cy="30" r="22" fill="none" stroke="#3b82f6" stroke-width="8"
+              stroke-dasharray="110 28" stroke-linecap="round" transform="rotate(-90 30 30)"/>
+          </svg>
+          <span class="dc-donut-num">15+</span>
+        </div>
+      </div>
+      <div class="deco-card dc3">
+        <div class="dc-label" style="font-family:'JetBrains Mono',monospace">workflow.n8n</div>
+        <div class="dc-code">
+          <span class="c-kw">TRIGGER</span> lead_intake<br>
+          <span class="c-kw">FILTER</span>&nbsp; &nbsp;segment_by<br>
+          <span class="c-kw">NOTIFY</span>&nbsp; crm_update
+        </div>
+      </div>
+      <div class="deco-card dc4">
+        <div class="dc-label">Effort Saved</div>
+        <div class="dc-big" style="color:#06b6d4">−30%</div>
+        <div class="dc-tag">🤖 Automated</div>
       </div>
     </div>
-  </header>
 
-  <!-- ══ STATS STRIP ═════════════════════════════════════════════════════ -->
+    <!-- Main hero content -->
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="hb-dot"></span> Open to Opportunities
+      </div>
+
+      <div class="profile-ring-wrap">
+        <img src="profile.jpg" alt="Ravi Ranjan Kumar" class="profile-pic"/>
+        <div class="profile-ring r1"></div>
+        <div class="profile-ring r2"></div>
+      </div>
+
+      <h1 class="hero-name">Ravi Ranjan Kumar</h1>
+
+      <div class="hero-typed-line">
+        <span id="typedText"></span><span class="typed-cur">|</span>
+      </div>
+
+      <p class="hero-desc">
+        Turning raw data into revenue-driving decisions through
+        <em>CRM automation</em>, <em>BI dashboards</em>, and <em>workflow intelligence</em>.
+      </p>
+
+      <div class="hero-meta-row">
+        <span><i class="fas fa-location-dot"></i> New Delhi, India</span>
+        <span><i class="fas fa-envelope"></i> ravikumar.inbh@gmail.com</span>
+        <span><i class="fas fa-phone"></i> +91 8851015209</span>
+      </div>
+
+      <div class="hero-btns">
+        <a href="#contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Get In Touch</a>
+        <a href="#projects" class="btn btn-secondary"><i class="fas fa-chart-bar"></i> View Projects</a>
+        <a href="https://drive.google.com/file/d/1fUoULa-MsDVAhEfkr2cplxpBVZh5RPG0/view?usp=drive_link"
+           target="_blank" class="btn btn-ghost"><i class="fas fa-download"></i> Download CV</a>
+      </div>
+
+      <div class="hero-socials">
+        <a href="https://github.com/RaviRanjanKumar-DA" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/ravi-ranjan-data-analyst/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://wa.me/918851015209" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+      <span>Scroll to explore</span>
+    </div>
+  </section>
+
+  <!-- ═══ STATS STRIP ═══════════════════════════════════════════════════ -->
   <div class="stats-strip">
     <div class="stat-item">
-      <div><span class="stat-num" data-target="4">0</span><span class="stat-suffix">+</span></div>
-      <span class="stat-label">Years Experience</span>
+      <i class="fas fa-calendar-check si-icon"></i>
+      <div class="si-num"><span class="stat-num" data-target="4">0</span><span class="si-sfx">+</span></div>
+      <div class="si-lbl">Years Experience</div>
     </div>
     <div class="stat-item">
-      <div><span class="stat-num" data-target="15">0</span><span class="stat-suffix">+</span></div>
-      <span class="stat-label">BI Dashboards Built</span>
+      <i class="fas fa-chart-pie si-icon"></i>
+      <div class="si-num"><span class="stat-num" data-target="15">0</span><span class="si-sfx">+</span></div>
+      <div class="si-lbl">BI Dashboards Built</div>
     </div>
     <div class="stat-item">
-      <div><span class="stat-num" data-target="40">0</span><span class="stat-suffix">%</span></div>
-      <span class="stat-label">Sales Productivity Boost</span>
+      <i class="fas fa-users si-icon"></i>
+      <div class="si-num"><span class="stat-num" data-target="40">0</span><span class="si-sfx">%</span></div>
+      <div class="si-lbl">Sales Productivity Boost</div>
     </div>
     <div class="stat-item">
-      <div><span class="stat-num" data-target="30">0</span><span class="stat-suffix">%</span></div>
-      <span class="stat-label">Manual Effort Reduced</span>
+      <i class="fas fa-robot si-icon"></i>
+      <div class="si-num"><span class="stat-num" data-target="30">0</span><span class="si-sfx">%</span></div>
+      <div class="si-lbl">Manual Effort Reduced</div>
     </div>
     <div class="stat-item">
-      <div><span class="stat-num" data-target="7">0</span><span class="stat-suffix">+</span></div>
-      <span class="stat-label">Projects Delivered</span>
+      <i class="fas fa-folder-open si-icon"></i>
+      <div class="si-num"><span class="stat-num" data-target="7">0</span><span class="si-sfx">+</span></div>
+      <div class="si-lbl">Projects Delivered</div>
     </div>
   </div>
 
-  <!-- ══ ABOUT ═══════════════════════════════════════════════════════════ -->
+  <!-- ═══ ABOUT ═════════════════════════════════════════════════════════ -->
   <section id="about" class="section">
     <div class="container">
-      <h2 class="section-title">About Me</h2>
+      <div class="sec-hdr reveal">
+        <span class="sec-eye">Get to know me</span>
+        <h2 class="sec-title">About Me</h2>
+      </div>
       <div class="about-grid">
-        <div class="about-text">
-          <p>I am <strong>Ravi Ranjan Kumar</strong>, a results-driven <strong>Data &amp; Business Operations Analyst</strong> with <strong>4+ years of experience</strong> spanning CRM management, workflow automation, business intelligence, and sales operations. With a Bachelor's degree in Economics (Hons.) from B.R.A. Bihar University, I combine deep analytical thinking with practical business acumen.</p>
-          <p>Currently working at <strong>The Batraa Numerology</strong> as a Data Analyst, I spearhead end-to-end lead management, architect <strong>15+ Power BI &amp; Metabase dashboards</strong>, and engineer automation workflows using <strong>n8n, Pabbly, and Claude AI</strong> — driving a <strong>40% improvement</strong> in sales team productivity and <strong>20–30% reduction</strong> in manual reporting effort.</p>
-          <p>My expertise spans <strong>CRM platforms</strong> (TeleCRM, CallerDesk, Smartflo), <strong>BI tools</strong> (Power BI, Metabase, Tableau), and <strong>automation tools</strong> (n8n, Pabbly, Claude AI). Previously, I delivered financial data operations at Innovate Insights (client: Paytm) and built real-time operational dashboards at Maral Overseas Ltd.</p>
-          <p>I am passionate about leveraging data and automation to solve real-world problems, optimize business processes, and deliver measurable, scalable impact.</p>
+        <div class="about-text reveal">
+          <p>I'm <strong>Ravi Ranjan Kumar</strong>, a results-driven <strong>Data &amp; Business Operations Analyst</strong> with <strong>4+ years of experience</strong> spanning CRM management, workflow automation, business intelligence, and sales operations. I hold a Bachelor's degree in Economics (Hons.) from B.R.A. Bihar University.</p>
+          <p>Currently at <strong>The Batraa Numerology</strong>, I architect <strong>15+ Power BI &amp; Metabase dashboards</strong>, deploy <strong>TeleCRM, CallerDesk &amp; Smartflo</strong> CRM platforms, and build <strong>n8n / Pabbly automation workflows</strong> that cut manual reporting by 20–30% and boost sales team productivity by 40%.</p>
+          <p>I bridge the gap between raw data and business action — transforming operational complexity into clean, scalable, automated processes that drive measurable revenue growth.</p>
+          <div class="about-chips">
+            <span class="chip"><i class="fas fa-database"></i> SQL &amp; Python</span>
+            <span class="chip"><i class="fas fa-chart-bar"></i> Power BI &amp; Metabase</span>
+            <span class="chip"><i class="fas fa-robot"></i> n8n &amp; Pabbly</span>
+            <span class="chip"><i class="fas fa-headset"></i> TeleCRM &amp; CallerDesk</span>
+            <span class="chip"><i class="fas fa-brain"></i> Claude AI</span>
+            <span class="chip"><i class="fas fa-sitemap"></i> Workflow Automation</span>
+          </div>
         </div>
-        <div class="about-highlights">
-          <div class="highlight-card">
-            <span class="h-icon">🎯</span>
-            <div>
-              <strong>Current Role</strong>
-              <p>Data Analyst @ The Batraa Numerology</p>
-            </div>
-          </div>
-          <div class="highlight-card">
-            <span class="h-icon">📍</span>
-            <div>
-              <strong>Location</strong>
-              <p>New Delhi, India</p>
-            </div>
-          </div>
-          <div class="highlight-card">
-            <span class="h-icon">🎓</span>
-            <div>
-              <strong>Education</strong>
-              <p>B.Sc. Economics (Hons.), 2018</p>
-            </div>
-          </div>
-          <div class="highlight-card">
-            <span class="h-icon">💼</span>
-            <div>
-              <strong>Target Roles</strong>
-              <p>Data Analyst · CRM Specialist · Sales Ops · MIS Executive</p>
-            </div>
-          </div>
+        <div class="about-info-col reveal">
+          <div class="info-card"><i class="fas fa-briefcase"></i><div><strong>Current Role</strong><p>Data Analyst @ The Batraa Numerology</p></div></div>
+          <div class="info-card"><i class="fas fa-location-dot"></i><div><strong>Location</strong><p>New Delhi, India</p></div></div>
+          <div class="info-card"><i class="fas fa-graduation-cap"></i><div><strong>Education</strong><p>B.Sc. Economics (Hons.) · 2018</p></div></div>
+          <div class="info-card"><i class="fas fa-bullseye"></i><div><strong>Target Roles</strong><p>Data Analyst · CRM Specialist · Sales Ops · MIS Executive</p></div></div>
+          <div class="info-card"><i class="fas fa-envelope"></i><div><strong>Email</strong><p><a href="mailto:ravikumar.inbh@gmail.com">ravikumar.inbh@gmail.com</a></p></div></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ SKILLS ══════════════════════════════════════════════════════════ -->
-  <section id="skills" class="section section-alt">
+  <!-- ═══ EXPERIENCE ════════════════════════════════════════════════════ -->
+  <section id="experience" class="section section-dark">
     <div class="container">
-      <h2 class="section-title">Skills &amp; Tools</h2>
-      <div class="skills-categories">
-
-        <div class="skills-cat-block fade-in">
-          <h3>📊 BI &amp; Analytics</h3>
-          <div class="skills-grid">
-            <div class="skill-chip"><img src="icons/powerbi.png" alt="Power BI"> Power BI</div>
-            <div class="skill-chip"><img src="icons/tableau.png" alt="Tableau"> Tableau</div>
-            <div class="skill-chip">📈 Metabase</div>
-            <div class="skill-chip"><img src="icons/excel.png" alt="Excel"> Advanced Excel</div>
-            <div class="skill-chip"><img src="icons/sheets.png" alt="Google Sheets"> Google Sheets</div>
-          </div>
-        </div>
-
-        <div class="skills-cat-block fade-in">
-          <h3>💻 Programming &amp; Data</h3>
-          <div class="skills-grid">
-            <div class="skill-chip"><img src="icons/sql.png" alt="SQL"> SQL</div>
-            <div class="skill-chip"><img src="icons/python.png" alt="Python"> Python</div>
-            <div class="skill-chip">🗃️ SQL Server</div>
-            <div class="skill-chip">🔄 SSIS</div>
-            <div class="skill-chip">☁️ Amazon S3 / SFTP</div>
-          </div>
-        </div>
-
-        <div class="skills-cat-block fade-in">
-          <h3>🤖 Automation &amp; CRM</h3>
-          <div class="skills-grid">
-            <div class="skill-chip">⚙️ n8n</div>
-            <div class="skill-chip">🔗 Pabbly</div>
-            <div class="skill-chip">🧠 Claude AI</div>
-            <div class="skill-chip">📞 TeleCRM</div>
-            <div class="skill-chip">📲 CallerDesk</div>
-            <div class="skill-chip">📡 Smartflo</div>
-          </div>
-        </div>
-
-        <div class="skills-cat-block fade-in">
-          <h3>🧩 Soft Skills</h3>
-          <div class="skills-grid">
-            <div class="skill-chip">🔍 Problem Solving</div>
-            <div class="skill-chip">💬 Communication</div>
-            <div class="skill-chip">⏱️ Time Management</div>
-            <div class="skill-chip">🤝 Collaboration</div>
-            <div class="skill-chip">🚀 Leadership</div>
-            <div class="skill-chip">📐 Attention to Detail</div>
-          </div>
-        </div>
-
+      <div class="sec-hdr reveal">
+        <span class="sec-eye">Career journey</span>
+        <h2 class="sec-title">Professional Experience</h2>
       </div>
-    </div>
-  </section>
-
-  <!-- ══ EXPERIENCE ══════════════════════════════════════════════════════ -->
-  <section id="experience" class="section">
-    <div class="container">
-      <h2 class="section-title">Professional Experience</h2>
       <div class="timeline">
 
-        <!-- ── Current: The Batraa Numerology ── -->
-        <div class="timeline-item current fade-in">
-          <div class="timeline-dot current-dot"></div>
-          <div class="exp-card current-card">
-            <div class="exp-header">
-              <div class="exp-left">
-                <span class="current-badge">● Current</span>
+        <div class="tl-item reveal">
+          <div class="tl-dot tl-dot-current"><i class="fas fa-circle-dot"></i></div>
+          <div class="tl-card tl-current">
+            <div class="tl-head">
+              <div class="tl-left">
+                <span class="tl-now"><i class="fas fa-circle"></i> Current</span>
                 <h3>Data Analyst</h3>
-                <p class="exp-company">The Batraa Numerology &nbsp;|&nbsp; New Delhi, India</p>
+                <p class="tl-co"><i class="fas fa-building"></i> The Batraa Numerology &nbsp;·&nbsp; New Delhi, India</p>
               </div>
-              <span class="exp-date">May 2025 – Present</span>
+              <span class="tl-date"><i class="fas fa-calendar"></i> May 2025 – Present</span>
             </div>
-            <ul class="exp-bullets">
-              <li>Spearhead end-to-end <strong>lead management operations</strong> for Sales &amp; Business Development teams, overseeing multi-product lines: Elite Diamond, Business Software, Vastu Platinum, Akashic Awakening, Logo Consultation, and Ratnakrit e-commerce.</li>
-              <li>Architected and maintain <strong>15+ Power BI &amp; Metabase dashboards</strong> — Funnel-to-Lead Conversion, Revenue Tracking, Occupancy Monitoring, Sales Productivity, Customer Journey Analysis, and E-commerce Analytics.</li>
-              <li>Engineered <strong>n8n and Pabbly automation workflows</strong> for intelligent lead segregation and auto-reporting of untouched leads, reducing manual reporting effort by <strong>20–30%</strong>.</li>
-              <li>Deployed <strong>TeleCRM, CallerDesk, and Smartflo</strong> for structured lead assignment and call tracking, delivering a <strong>40% improvement</strong> in sales executive productivity.</li>
-              <li>Automated Google Sheets pipelines with <strong>Claude AI</strong> — lead bifurcation, conversion reporting, attendance management, leave tracking, and event reminders.</li>
-              <li>Built <strong>customer segmentation models</strong> based on product affinity and service tier for targeted lead nurturing and lifecycle management.</li>
-              <li>Improved overall business process efficiency by <strong>8–10%</strong> through SOP creation, process documentation, and cross-team operational guidance.</li>
+            <ul class="tl-list">
+              <li>Spearhead end-to-end <strong>lead management operations</strong> for multi-product lines: Elite Diamond, Business Software, Vastu Platinum, Akashic Awakening, Logo Consultation &amp; Ratnakrit e-commerce.</li>
+              <li>Architected and maintain <strong>15+ Power BI &amp; Metabase dashboards</strong> — Funnel Conversion, Revenue Tracking, Occupancy, Sales Productivity, Customer Journey, Process Gap &amp; E-commerce Analytics.</li>
+              <li>Engineered <strong>n8n &amp; Pabbly automation workflows</strong> for lead segregation and 15-day untouched-lead auto-alerts — reducing manual reporting by <strong>20–30%</strong>.</li>
+              <li>Deployed <strong>TeleCRM, CallerDesk &amp; Smartflo</strong> for structured lead assignment and call tracking — achieving a <strong>40% sales productivity boost</strong>.</li>
+              <li>Automated <strong>Google Sheets pipelines via Claude AI</strong> — lead bifurcation, conversion reporting, attendance, leave tracking &amp; event reminders.</li>
+              <li>Built <strong>customer segmentation models</strong> by product affinity and service tier for targeted nurturing &amp; lifecycle optimization.</li>
+              <li>Improved business process efficiency by <strong>8–10%</strong> through SOP creation, documentation, and cross-team guidance.</li>
             </ul>
+            <div class="tl-tags">
+              <span>Power BI</span><span>Metabase</span><span>n8n</span><span>Pabbly</span>
+              <span>TeleCRM</span><span>CallerDesk</span><span>Smartflo</span><span>Claude AI</span>
+            </div>
           </div>
         </div>
 
-        <!-- ── Innovate Insights ── -->
-        <div class="timeline-item fade-in">
-          <div class="timeline-dot"></div>
-          <div class="exp-card">
-            <div class="exp-header">
-              <div class="exp-left">
+        <div class="tl-item reveal">
+          <div class="tl-dot"><i class="fas fa-circle-dot"></i></div>
+          <div class="tl-card">
+            <div class="tl-head">
+              <div class="tl-left">
                 <h3>Data Analyst</h3>
-                <p class="exp-company">
-                  <img src="icons/IICPL Logo.png" alt="IICPL" class="co-logo">
-                  Innovate Insights Consultancy &nbsp;|&nbsp; Noida, UP
-                </p>
-                <p class="exp-client">
-                  Client: <img src="icons/Paytm Logo.jpg" alt="Paytm" class="co-logo"> ONE97 Communications Ltd. (Paytm)
-                </p>
+                <p class="tl-co"><img src="icons/IICPL Logo.png" alt="" class="tl-logo"> Innovate Insights Consultancy &nbsp;·&nbsp; Noida, UP</p>
+                <p class="tl-client"><i class="fas fa-user-tie"></i> Client: <img src="icons/Paytm Logo.jpg" alt="Paytm" class="tl-logo"> ONE97 Communications Ltd. (Paytm)</p>
               </div>
-              <span class="exp-date">Mar 2024 – Mar 2025</span>
+              <span class="tl-date"><i class="fas fa-calendar"></i> Mar 2024 – Mar 2025</span>
             </div>
-            <ul class="exp-bullets">
-              <li>Managed large-scale data operations using <strong>SQL Server, Power BI, Excel, and Google Sheets</strong>, ensuring high data accuracy across financial datasets.</li>
-              <li>Led <strong>financial reconciliation</strong> initiatives maintaining alignment between bank records and internal transaction data, reducing error rates.</li>
-              <li>Developed automated data ingestion pipelines via <strong>SFTP and Amazon S3</strong>, significantly reducing manual workload and processing time.</li>
-              <li>Designed analytical dashboards for <strong>transaction visibility</strong>, exception tracking, and cross-unit operational reporting.</li>
+            <ul class="tl-list">
+              <li>Managed large-scale data operations via <strong>SQL Server, Power BI, Excel &amp; Google Sheets</strong> ensuring high accuracy across financial datasets.</li>
+              <li>Led <strong>financial reconciliation</strong> aligning bank records with internal transaction data, reducing error rates significantly.</li>
+              <li>Built automated ingestion pipelines via <strong>SFTP and Amazon S3</strong>, reducing manual processing time.</li>
+              <li>Designed analytical dashboards for <strong>transaction visibility</strong>, exception tracking &amp; cross-unit reporting.</li>
             </ul>
+            <div class="tl-tags"><span>SQL Server</span><span>Power BI</span><span>Excel</span><span>SFTP</span><span>Amazon S3</span></div>
           </div>
         </div>
 
-        <!-- ── Maral Overseas ── -->
-        <div class="timeline-item fade-in">
-          <div class="timeline-dot"></div>
-          <div class="exp-card">
-            <div class="exp-header">
-              <div class="exp-left">
+        <div class="tl-item reveal">
+          <div class="tl-dot"><i class="fas fa-circle-dot"></i></div>
+          <div class="tl-card">
+            <div class="tl-head">
+              <div class="tl-left">
                 <h3>Business Analyst</h3>
-                <p class="exp-company">
-                  <img src="icons/Maral Overseas Logo.png" alt="Maral" class="co-logo">
-                  Maral Overseas Ltd. &nbsp;|&nbsp; Noida, UP
-                </p>
+                <p class="tl-co"><img src="icons/Maral Overseas Logo.png" alt="" class="tl-logo"> Maral Overseas Ltd. &nbsp;·&nbsp; Noida, UP</p>
               </div>
-              <span class="exp-date">Apr 2023 – Mar 2024</span>
+              <span class="tl-date"><i class="fas fa-calendar"></i> Apr 2023 – Mar 2024</span>
             </div>
-            <ul class="exp-bullets">
-              <li>Conducted comprehensive <strong>stock and WIP analysis</strong> to optimize inventory management and streamline production workflows.</li>
-              <li>Built <strong>Power BI dashboards</strong> delivering real-time operational and financial insights to senior leadership.</li>
-              <li>Analyzed sales trends using <strong>SQL</strong> to improve demand forecast accuracy and support strategic supply chain planning.</li>
-              <li>Developed structured tracking reports for <strong>dispatch monitoring and payment follow-ups</strong>, improving operational transparency.</li>
+            <ul class="tl-list">
+              <li>Conducted <strong>stock &amp; WIP analysis</strong> to optimize inventory management and streamline production workflows.</li>
+              <li>Built <strong>Power BI dashboards</strong> delivering real-time operational &amp; financial insights to senior leadership.</li>
+              <li>Analyzed sales trends using <strong>SQL</strong> to improve forecast accuracy and supply chain planning.</li>
+              <li>Developed structured reports for <strong>dispatch monitoring and payment follow-ups</strong>.</li>
             </ul>
+            <div class="tl-tags"><span>Power BI</span><span>SQL</span><span>Inventory</span><span>Sales Forecasting</span></div>
           </div>
         </div>
 
-        <!-- ── IIFL Samasta ── -->
-        <div class="timeline-item fade-in">
-          <div class="timeline-dot"></div>
-          <div class="exp-card">
-            <div class="exp-header">
-              <div class="exp-left">
+        <div class="tl-item reveal">
+          <div class="tl-dot"><i class="fas fa-circle-dot"></i></div>
+          <div class="tl-card">
+            <div class="tl-head">
+              <div class="tl-left">
                 <h3>Branch Credit Manager</h3>
-                <p class="exp-company">
-                  <img src="icons/IIFL Samasta Logo.png" alt="IIFL" class="co-logo">
-                  IIFL Samasta &nbsp;|&nbsp; Madhubani, BH
-                </p>
+                <p class="tl-co"><img src="icons/IIFL Samasta Logo.png" alt="" class="tl-logo"> IIFL Samasta &nbsp;·&nbsp; Madhubani, BH</p>
               </div>
-              <span class="exp-date">Aug 2018 – Nov 2020</span>
+              <span class="tl-date"><i class="fas fa-calendar"></i> Aug 2018 – Nov 2020</span>
             </div>
-            <ul class="exp-bullets">
-              <li>Managed <strong>financial data verification and compliance reporting</strong>, maintaining high accuracy standards across loan portfolios.</li>
-              <li>Strengthened loan disbursement processes through rigorous <strong>credit risk assessment</strong> and structured underwriting protocols.</li>
-              <li>Optimized <strong>collection strategies</strong> and follow-up workflows, improving repayment timelines and reducing delinquency rates.</li>
+            <ul class="tl-list">
+              <li>Managed <strong>financial data verification and compliance reporting</strong> across loan portfolios.</li>
+              <li>Strengthened loan disbursement via rigorous <strong>credit risk assessment</strong> and underwriting protocols.</li>
+              <li>Optimized <strong>collection strategies</strong>, improving repayment timelines and reducing delinquency rates.</li>
             </ul>
+            <div class="tl-tags"><span>Credit Risk</span><span>Financial Reporting</span><span>Loan Management</span></div>
           </div>
         </div>
 
@@ -281,216 +298,403 @@
     </div>
   </section>
 
-  <!-- ══ KEY ACHIEVEMENTS ════════════════════════════════════════════════ -->
-  <section id="achievements" class="section section-alt">
+  <!-- ═══ SKILLS ════════════════════════════════════════════════════════ -->
+  <section id="skills" class="section">
     <div class="container">
-      <h2 class="section-title">Key Achievements</h2>
-      <div class="achievements-grid">
-        <div class="ach-card fade-in">
-          <div class="ach-metric">40%</div>
-          <div class="ach-desc">Increase in sales executive productivity via TeleCRM &amp; Smartflo deployment and structured lead management</div>
+      <div class="sec-hdr reveal">
+        <span class="sec-eye">Technical expertise</span>
+        <h2 class="sec-title">Skills &amp; Tools</h2>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-block reveal">
+          <div class="sb-head"><i class="fas fa-chart-line"></i><h3>BI &amp; Analytics</h3></div>
+          <div class="sk-chips">
+            <div class="sk-chip"><img src="icons/powerbi.png" alt="Power BI"><span>Power BI</span></div>
+            <div class="sk-chip"><img src="icons/tableau.png" alt="Tableau"><span>Tableau</span></div>
+            <div class="sk-chip"><i class="fas fa-chart-pie" style="color:#f59e0b"></i><span>Metabase</span></div>
+            <div class="sk-chip"><i class="fas fa-magnifying-glass-chart" style="color:#4285f4"></i><span>Looker Studio</span></div>
+            <div class="sk-chip"><img src="icons/excel.png" alt="Excel"><span>Advanced Excel</span></div>
+            <div class="sk-chip"><img src="icons/sheets.png" alt="Sheets"><span>Google Sheets</span></div>
+          </div>
         </div>
-        <div class="ach-card fade-in">
-          <div class="ach-metric">20–30%</div>
-          <div class="ach-desc">Reduction in manual reporting effort through n8n &amp; Pabbly workflow automation across operations</div>
+        <div class="skill-block reveal">
+          <div class="sb-head"><i class="fas fa-code"></i><h3>Programming &amp; Data</h3></div>
+          <div class="sk-chips">
+            <div class="sk-chip"><img src="icons/sql.png" alt="SQL"><span>SQL</span></div>
+            <div class="sk-chip"><img src="icons/python.png" alt="Python"><span>Python</span></div>
+            <div class="sk-chip"><i class="fas fa-server" style="color:#3b82f6"></i><span>SQL Server</span></div>
+            <div class="sk-chip"><i class="fab fa-aws" style="color:#f59e0b"></i><span>Amazon S3</span></div>
+            <div class="sk-chip"><i class="fas fa-shuffle" style="color:#8b5cf6"></i><span>SSIS</span></div>
+            <div class="sk-chip"><i class="fab fa-github" style="color:#e2e8f0"></i><span>GitHub</span></div>
+          </div>
         </div>
-        <div class="ach-card fade-in">
-          <div class="ach-metric">15+</div>
-          <div class="ach-desc">BI dashboards built across Power BI &amp; Metabase covering full customer lifecycle and business metrics</div>
+        <div class="skill-block reveal">
+          <div class="sb-head"><i class="fas fa-robot"></i><h3>Automation &amp; AI</h3></div>
+          <div class="sk-chips">
+            <div class="sk-chip"><i class="fas fa-network-wired" style="color:#06b6d4"></i><span>n8n</span></div>
+            <div class="sk-chip"><i class="fas fa-link" style="color:#10b981"></i><span>Pabbly</span></div>
+            <div class="sk-chip"><i class="fas fa-brain" style="color:#8b5cf6"></i><span>Claude AI</span></div>
+            <div class="sk-chip"><i class="fas fa-comment-dots" style="color:#10b981"></i><span>ChatGPT</span></div>
+            <div class="sk-chip"><i class="fab fa-google" style="color:#4285f4"></i><span>Apps Script</span></div>
+          </div>
         </div>
-        <div class="ach-card fade-in">
-          <div class="ach-metric">8–10%</div>
-          <div class="ach-desc">Business process efficiency gain through structured SOP creation and operational documentation</div>
-        </div>
-        <div class="ach-card fade-in">
-          <div class="ach-metric">5+</div>
-          <div class="ach-desc">Google Sheets workflows automated using Claude AI — attendance, leave, leads, and event reporting</div>
-        </div>
-        <div class="ach-card fade-in">
-          <div class="ach-metric">4+</div>
-          <div class="ach-desc">Years delivering data-driven insights across fintech, textile manufacturing, and digital product verticals</div>
+        <div class="skill-block reveal">
+          <div class="sb-head"><i class="fas fa-headset"></i><h3>CRM &amp; Operations</h3></div>
+          <div class="sk-chips">
+            <div class="sk-chip"><i class="fas fa-phone" style="color:#3b82f6"></i><span>TeleCRM</span></div>
+            <div class="sk-chip"><i class="fas fa-phone-volume" style="color:#06b6d4"></i><span>CallerDesk</span></div>
+            <div class="sk-chip"><i class="fas fa-satellite-dish" style="color:#f59e0b"></i><span>Smartflo</span></div>
+            <div class="sk-chip"><i class="fas fa-users-gear" style="color:#10b981"></i><span>Lead Management</span></div>
+            <div class="sk-chip"><i class="fas fa-chart-column" style="color:#8b5cf6"></i><span>Sales Operations</span></div>
+            <div class="sk-chip"><i class="fas fa-file-lines" style="color:#f43f5e"></i><span>SOP Documentation</span></div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ PROJECTS ════════════════════════════════════════════════════════ -->
-  <section id="projects" class="section">
+  <!-- ═══ PROJECTS ══════════════════════════════════════════════════════ -->
+  <section id="projects" class="section section-dark">
     <div class="container">
-      <h2 class="section-title">Projects</h2>
-      <div class="projects-grid">
+      <div class="sec-hdr reveal">
+        <span class="sec-eye">Work showcase</span>
+        <h2 class="sec-title">Dashboards &amp; Projects</h2>
+      </div>
 
-        <div class="project-card fade-in">
-          <img src="icons/Customer Loan Data Analysis.jpg" alt="Customer Loan Analysis" class="project-img">
-          <div class="project-info">
-            <div class="project-tag">SQL · EDA · Banking</div>
+      <h3 class="sub-head reveal"><i class="fas fa-chart-bar"></i> Professional Dashboards</h3>
+      <div class="proj-grid">
+
+        <div class="proj-card reveal">
+          <div class="proj-top">
+            <div class="proj-icon-wrap" style="background:linear-gradient(135deg,#3b82f6,#06b6d4)"><i class="fas fa-chart-line"></i></div>
+            <span class="proj-badge">Power BI · Metabase</span>
+          </div>
+          <h3>Revenue &amp; Sales Funnel</h3>
+          <p>End-to-end revenue tracking with funnel-to-conversion analysis, booking trends, and real-time sales KPIs across all product lines.</p>
+          <div class="proj-tags"><span>Power BI</span><span>Metabase</span><span>TeleCRM</span></div>
+        </div>
+
+        <div class="proj-card reveal">
+          <div class="proj-top">
+            <div class="proj-icon-wrap" style="background:linear-gradient(135deg,#8b5cf6,#ec4899)"><i class="fas fa-route"></i></div>
+            <span class="proj-badge">Customer Analytics</span>
+          </div>
+          <h3>Customer Journey &amp; Segmentation</h3>
+          <p>Multi-dimensional lifecycle dashboard with product-affinity segmentation, stage tracking, and lead nurturing intelligence.</p>
+          <div class="proj-tags"><span>Power BI</span><span>Segmentation</span><span>Google Sheets</span></div>
+        </div>
+
+        <div class="proj-card reveal">
+          <div class="proj-top">
+            <div class="proj-icon-wrap" style="background:linear-gradient(135deg,#10b981,#14b8a6)"><i class="fas fa-users"></i></div>
+            <span class="proj-badge">Sales Operations</span>
+          </div>
+          <h3>Sales Productivity Dashboard</h3>
+          <p>Executive performance tracking with call activity, lead coverage, conversion rates, and productivity benchmarks across teams.</p>
+          <div class="proj-tags"><span>TeleCRM</span><span>Smartflo</span><span>Power BI</span></div>
+        </div>
+
+        <div class="proj-card reveal">
+          <div class="proj-top">
+            <div class="proj-icon-wrap" style="background:linear-gradient(135deg,#f59e0b,#f97316)"><i class="fas fa-shopping-cart"></i></div>
+            <span class="proj-badge">E-commerce · Metabase</span>
+          </div>
+          <h3>E-commerce Analytics</h3>
+          <p>Ratnakrit store performance: product sales, inventory, order trends, and customer behavior for crystals, rudraksha, and accessories.</p>
+          <div class="proj-tags"><span>Metabase</span><span>SQL</span><span>E-commerce</span></div>
+        </div>
+
+        <div class="proj-card reveal">
+          <div class="proj-top">
+            <div class="proj-icon-wrap" style="background:linear-gradient(135deg,#06b6d4,#0ea5e9)"><i class="fas fa-robot"></i></div>
+            <span class="proj-badge">n8n · Pabbly · Claude AI</span>
+          </div>
+          <h3>CRM Automation Workflows</h3>
+          <p>Intelligent lead segregation, 15-day untouched-lead auto-alerts, and Google Sheets automation for attendance, leave &amp; conversions.</p>
+          <div class="proj-tags"><span>n8n</span><span>Pabbly</span><span>Claude AI</span></div>
+        </div>
+
+        <div class="proj-card reveal">
+          <div class="proj-top">
+            <div class="proj-icon-wrap" style="background:linear-gradient(135deg,#f43f5e,#e11d48)"><i class="fas fa-calendar-check"></i></div>
+            <span class="proj-badge">Automation · HR</span>
+          </div>
+          <h3>Attendance &amp; Leave Tracker</h3>
+          <p>Automated attendance management with leave tracking, event reminders, and MIS reporting via Google Sheets and Claude AI.</p>
+          <div class="proj-tags"><span>Google Sheets</span><span>Claude AI</span><span>Automation</span></div>
+        </div>
+
+      </div>
+
+      <!-- GitHub Portfolio Projects -->
+      <h3 class="sub-head reveal" style="margin-top:52px"><i class="fab fa-github"></i> Data Analysis Portfolio</h3>
+      <div class="proj-grid">
+
+        <div class="proj-card has-img reveal">
+          <img src="icons/Customer Loan Data Analysis.jpg" alt="Customer Loan Analysis" class="pimg">
+          <div class="pimg-overlay">
+            <span class="proj-badge">SQL · EDA · Banking</span>
             <h3>Customer Loan Analysis</h3>
-            <p>Analyzed bank customer data to identify loan eligibility patterns using exploratory data analysis and statistical insights.</p>
-            <div class="project-footer">
-              <span class="project-date">📅 Oct 2022</span>
-              <a href="https://github.com/RaviRanjanKumar-DA/Bank-Loan-of-Customers_AI-Varient" target="_blank" class="project-link">View on GitHub →</a>
-            </div>
+            <p>Bank customer loan eligibility using EDA and statistical insights.</p>
+            <div class="proj-tags"><span>SQL</span><span>Python</span><span>EDA</span></div>
+            <a href="https://github.com/RaviRanjanKumar-DA/Bank-Loan-of-Customers_AI-Varient" target="_blank" class="plink"><i class="fab fa-github"></i> View on GitHub</a>
           </div>
+          <div class="pimg-date">Oct 2022</div>
         </div>
 
-        <div class="project-card fade-in">
-          <img src="icons/Adventure Works Cycle.jpg" alt="Adventure Works" class="project-img">
-          <div class="project-info">
-            <div class="project-tag">Tableau · Sales Analytics</div>
-            <h3>Adventure Works Cycles Analysis</h3>
-            <p>Performed sales and profitability analysis for a cycling company using Tableau to uncover performance trends.</p>
-            <div class="project-footer">
-              <span class="project-date">📅 Jan 2023</span>
-              <a href="https://github.com/RaviRanjanKumar-DA/Adventure_Work_Cycle_Analysis" target="_blank" class="project-link">View on GitHub →</a>
-            </div>
+        <div class="proj-card has-img reveal">
+          <img src="icons/Adventure Works Cycle.jpg" alt="Adventure Works" class="pimg">
+          <div class="pimg-overlay">
+            <span class="proj-badge">Tableau · Sales</span>
+            <h3>Adventure Works Cycles</h3>
+            <p>Sales and profitability analysis using Tableau to uncover trends.</p>
+            <div class="proj-tags"><span>Tableau</span><span>Sales Analytics</span></div>
+            <a href="https://github.com/RaviRanjanKumar-DA/Adventure_Work_Cycle_Analysis" target="_blank" class="plink"><i class="fab fa-github"></i> View on GitHub</a>
           </div>
+          <div class="pimg-date">Jan 2023</div>
         </div>
 
-        <div class="project-card fade-in">
-          <img src="icons/Blinkit Sales Analysis.jpg" alt="Blinkit Sales" class="project-img">
-          <div class="project-info">
-            <div class="project-tag">Power BI · E-commerce · EDA</div>
+        <div class="proj-card has-img reveal">
+          <img src="icons/Blinkit Sales Analysis.jpg" alt="Blinkit" class="pimg">
+          <div class="pimg-overlay">
+            <span class="proj-badge">Power BI · E-commerce</span>
             <h3>Blinkit Sales Analysis</h3>
-            <p>Conducted EDA on Blinkit sales data to understand customer behavior, sales patterns, and delivery trends.</p>
-            <div class="project-footer">
-              <span class="project-date">📅 Jan 2025</span>
-              <a href="https://github.com/RaviRanjanKumar-DA/Blinkit_Sales_Analysis" target="_blank" class="project-link">View on GitHub →</a>
-            </div>
+            <p>EDA on Blinkit data — customer behavior, sales patterns &amp; delivery trends.</p>
+            <div class="proj-tags"><span>Power BI</span><span>EDA</span></div>
+            <a href="https://github.com/RaviRanjanKumar-DA/Blinkit_Sales_Analysis" target="_blank" class="plink"><i class="fab fa-github"></i> View on GitHub</a>
           </div>
+          <div class="pimg-date">Jan 2025</div>
         </div>
 
-        <div class="project-card fade-in">
-          <img src="icons/Spotify Music Analysis.jpg" alt="Spotify Analysis" class="project-img">
-          <div class="project-info">
-            <div class="project-tag">Power BI · Trend Analysis</div>
+        <div class="proj-card has-img reveal">
+          <img src="icons/Spotify Music Analysis.jpg" alt="Spotify" class="pimg">
+          <div class="pimg-overlay">
+            <span class="proj-badge">Power BI · Trends</span>
             <h3>Spotify Music Analysis</h3>
-            <p>Analyzed Spotify data to identify music trends, popular genres, and user listening behavior using Power BI.</p>
-            <div class="project-footer">
-              <span class="project-date">📅 Feb 2025</span>
-              <a href="https://github.com/RaviRanjanKumar-DA/Spotify_Sales_Analysis" target="_blank" class="project-link">View on GitHub →</a>
-            </div>
+            <p>Music trends, popular genres &amp; listening behavior on Power BI.</p>
+            <div class="proj-tags"><span>Power BI</span><span>Trends</span></div>
+            <a href="https://github.com/RaviRanjanKumar-DA/Spotify_Sales_Analysis" target="_blank" class="plink"><i class="fab fa-github"></i> View on GitHub</a>
           </div>
+          <div class="pimg-date">Feb 2025</div>
         </div>
 
-        <div class="project-card fade-in">
-          <img src="icons/Mobile Sales Analysis.jpg" alt="Mobile Sales" class="project-img">
-          <div class="project-info">
-            <div class="project-tag">Power BI · Dashboard · Retail</div>
+        <div class="proj-card has-img reveal">
+          <img src="icons/Mobile Sales Analysis.jpg" alt="Mobile Sales" class="pimg">
+          <div class="pimg-overlay">
+            <span class="proj-badge">Power BI · Dashboard</span>
             <h3>Mobile Sales Analysis</h3>
-            <p>Built a dynamic Power BI dashboard to analyze mobile sales, brand performance, and regional demand trends.</p>
-            <div class="project-footer">
-              <span class="project-date">📅 Apr 2025</span>
-              <a href="https://github.com/RaviRanjanKumar-DA/Mobile-Sales_Power-BI" target="_blank" class="project-link">View on GitHub →</a>
-            </div>
+            <p>Dynamic Power BI dashboard for brand performance &amp; regional demand.</p>
+            <div class="proj-tags"><span>Power BI</span><span>Dashboard</span></div>
+            <a href="https://github.com/RaviRanjanKumar-DA/Mobile-Sales_Power-BI" target="_blank" class="plink"><i class="fab fa-github"></i> View on GitHub</a>
           </div>
+          <div class="pimg-date">Apr 2025</div>
         </div>
 
-        <div class="project-card no-img fade-in">
-          <div class="project-info">
-            <div class="project-tag">SQL · Business Intelligence</div>
-            <h3>Blinkit SQL Analysis</h3>
-            <p>Used advanced SQL queries to extract business insights from Blinkit order and delivery datasets for optimization.</p>
-            <div class="project-footer">
-              <span class="project-date">📅 Apr 2025</span>
-              <a href="https://github.com/RaviRanjanKumar-DA/Blinkit_SQL_Analysis" target="_blank" class="project-link">View on GitHub →</a>
-            </div>
+        <div class="proj-card reveal">
+          <div class="proj-top">
+            <div class="proj-icon-wrap" style="background:linear-gradient(135deg,#3b82f6,#8b5cf6)"><i class="fas fa-database"></i></div>
+            <span class="proj-badge">SQL · BI</span>
           </div>
-        </div>
-
-        <div class="project-card no-img fade-in">
-          <div class="project-info">
-            <div class="project-tag">SQL · Retail Analytics</div>
-            <h3>Retail Sales Analysis</h3>
-            <p>Performed retail sales data analysis using SQL to uncover trends, top products, and seasonal sales patterns.</p>
-            <div class="project-footer">
-              <span class="project-date">📅 May 2025</span>
-              <a href="https://github.com/RaviRanjanKumar-DA/Retail_Sales_SQL-Analysis" target="_blank" class="project-link">View on GitHub →</a>
-            </div>
-          </div>
+          <h3>Blinkit SQL Analysis</h3>
+          <p>Advanced SQL to extract business insights from order and delivery datasets.</p>
+          <div class="proj-tags"><span>SQL</span><span>Business Intelligence</span></div>
+          <a href="https://github.com/RaviRanjanKumar-DA/Blinkit_SQL_Analysis" target="_blank" class="plink"><i class="fab fa-github"></i> View on GitHub</a>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- ══ EDUCATION ═══════════════════════════════════════════════════════ -->
-  <section id="education" class="section section-alt">
+  <!-- ═══ ACHIEVEMENTS ══════════════════════════════════════════════════ -->
+  <section id="achievements" class="section">
     <div class="container">
-      <h2 class="section-title">Education</h2>
-      <div class="edu-card fade-in">
-        <div class="edu-icon">🎓</div>
-        <div class="edu-details">
+      <div class="sec-hdr reveal">
+        <span class="sec-eye">Impact delivered</span>
+        <h2 class="sec-title">Key Achievements</h2>
+      </div>
+      <div class="ach-grid">
+        <div class="ach-card reveal">
+          <div class="ach-glow" style="--gc:#3b82f6"></div>
+          <div class="ach-ico" style="background:rgba(59,130,246,.15);color:#3b82f6"><i class="fas fa-arrow-trend-up"></i></div>
+          <div class="ach-num" style="color:#3b82f6">40%</div>
+          <div class="ach-ttl">Sales Productivity Boost</div>
+          <p>Through strategic TeleCRM &amp; Smartflo deployment and structured lead management protocols.</p>
+        </div>
+        <div class="ach-card reveal">
+          <div class="ach-glow" style="--gc:#06b6d4"></div>
+          <div class="ach-ico" style="background:rgba(6,182,212,.15);color:#06b6d4"><i class="fas fa-robot"></i></div>
+          <div class="ach-num" style="color:#06b6d4">20–30%</div>
+          <div class="ach-ttl">Manual Effort Eliminated</div>
+          <p>Via n8n and Pabbly automation workflows replacing repetitive reporting and lead management tasks.</p>
+        </div>
+        <div class="ach-card reveal">
+          <div class="ach-glow" style="--gc:#f59e0b"></div>
+          <div class="ach-ico" style="background:rgba(245,158,11,.15);color:#f59e0b"><i class="fas fa-chart-pie"></i></div>
+          <div class="ach-num" style="color:#f59e0b">15+</div>
+          <div class="ach-ttl">BI Dashboards Delivered</div>
+          <p>Power BI &amp; Metabase dashboards spanning revenue, customer journey, sales, e-commerce &amp; operations.</p>
+        </div>
+        <div class="ach-card reveal">
+          <div class="ach-glow" style="--gc:#10b981"></div>
+          <div class="ach-ico" style="background:rgba(16,185,129,.15);color:#10b981"><i class="fas fa-gears"></i></div>
+          <div class="ach-num" style="color:#10b981">8–10%</div>
+          <div class="ach-ttl">Process Efficiency Gain</div>
+          <p>Through structured SOP creation, process documentation, and cross-team operational guidance.</p>
+        </div>
+        <div class="ach-card reveal">
+          <div class="ach-glow" style="--gc:#8b5cf6"></div>
+          <div class="ach-ico" style="background:rgba(139,92,246,.15);color:#8b5cf6"><i class="fas fa-bolt"></i></div>
+          <div class="ach-num" style="color:#8b5cf6">5+</div>
+          <div class="ach-ttl">AI-Powered Automations</div>
+          <p>Google Sheets workflows automated via Claude AI — attendance, lead bifurcation, reporting &amp; reminders.</p>
+        </div>
+        <div class="ach-card reveal">
+          <div class="ach-glow" style="--gc:#f43f5e"></div>
+          <div class="ach-ico" style="background:rgba(244,63,94,.15);color:#f43f5e"><i class="fas fa-trophy"></i></div>
+          <div class="ach-num" style="color:#f43f5e">4+</div>
+          <div class="ach-ttl">Years of Expertise</div>
+          <p>Delivering data-driven insights across fintech, manufacturing, and digital product verticals.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ EDUCATION ═════════════════════════════════════════════════════ -->
+  <section class="section section-dark">
+    <div class="container">
+      <div class="sec-hdr reveal">
+        <span class="sec-eye">Academic background</span>
+        <h2 class="sec-title">Education</h2>
+      </div>
+      <div class="edu-card reveal">
+        <div class="edu-ico">🎓</div>
+        <div class="edu-detail">
           <h3>Bachelor of Economics (Hons.)</h3>
           <p class="edu-inst">Babasaheb Bhimrao Ambedkar Bihar University</p>
-          <p class="edu-year">2018</p>
+          <p class="edu-yr">2018 &nbsp;·&nbsp; New Delhi, India</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ RESUME ══════════════════════════════════════════════════════════ -->
-  <section id="resume" class="section">
+  <!-- ═══ CONTACT ═══════════════════════════════════════════════════════ -->
+  <section id="contact" class="section">
     <div class="container">
-      <h2 class="section-title">Resume</h2>
-      <div class="resume-block fade-in">
-        <p>Download my latest CV to learn more about my experience, skills, and key achievements.</p>
-        <a href="https://drive.google.com/file/d/1fUoULa-MsDVAhEfkr2cplxpBVZh5RPG0/view?usp=drive_link"
-           class="btn btn-primary" target="_blank">📄 Download Resume</a>
+      <div class="sec-hdr reveal">
+        <span class="sec-eye">Let's connect</span>
+        <h2 class="sec-title">Get In Touch</h2>
+        <p class="sec-sub">Open to roles, collaborations, and interesting conversations.</p>
+      </div>
+      <div class="contact-layout">
+
+        <div class="contact-cards reveal">
+          <a href="mailto:ravikumar.inbh@gmail.com" class="cc">
+            <div class="cc-ico" style="background:linear-gradient(135deg,#3b82f6,#06b6d4)"><i class="fas fa-envelope"></i></div>
+            <div class="cc-body"><strong>Email</strong><p>ravikumar.inbh@gmail.com</p></div>
+            <i class="fas fa-arrow-right cc-arr"></i>
+          </a>
+          <a href="tel:+918851015209" class="cc">
+            <div class="cc-ico" style="background:linear-gradient(135deg,#10b981,#14b8a6)"><i class="fas fa-phone"></i></div>
+            <div class="cc-body"><strong>Phone</strong><p>+91 8851015209</p></div>
+            <i class="fas fa-arrow-right cc-arr"></i>
+          </a>
+          <a href="https://wa.me/918851015209" target="_blank" class="cc">
+            <div class="cc-ico" style="background:linear-gradient(135deg,#22c55e,#16a34a)"><i class="fab fa-whatsapp"></i></div>
+            <div class="cc-body"><strong>WhatsApp</strong><p>Message me instantly</p></div>
+            <i class="fas fa-arrow-right cc-arr"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/ravi-ranjan-data-analyst/" target="_blank" class="cc">
+            <div class="cc-ico" style="background:linear-gradient(135deg,#0077b5,#0ea5e9)"><i class="fab fa-linkedin"></i></div>
+            <div class="cc-body"><strong>LinkedIn</strong><p>ravi-ranjan-data-analyst</p></div>
+            <i class="fas fa-arrow-right cc-arr"></i>
+          </a>
+          <a href="https://github.com/RaviRanjanKumar-DA" target="_blank" class="cc">
+            <div class="cc-ico" style="background:linear-gradient(135deg,#374151,#111827)"><i class="fab fa-github"></i></div>
+            <div class="cc-body"><strong>GitHub</strong><p>RaviRanjanKumar-DA</p></div>
+            <i class="fas fa-arrow-right cc-arr"></i>
+          </a>
+          <div class="cc">
+            <div class="cc-ico" style="background:linear-gradient(135deg,#f59e0b,#ef4444)"><i class="fas fa-location-dot"></i></div>
+            <div class="cc-body"><strong>Location</strong><p>New Delhi, India</p></div>
+          </div>
+        </div>
+
+        <form class="cform reveal" id="contactForm">
+          <div class="fg">
+            <label>Your Name</label>
+            <input type="text" name="firstName" placeholder="John Doe" required/>
+          </div>
+          <div class="frow">
+            <div class="fg">
+              <label>Email</label>
+              <input type="email" name="email" placeholder="john@company.com" required/>
+            </div>
+            <div class="fg">
+              <label>Phone</label>
+              <input type="tel" name="contact" placeholder="+91 XXXXX XXXXX"/>
+            </div>
+          </div>
+          <div class="fg">
+            <label>Organization</label>
+            <input type="text" name="organization" placeholder="Company name"/>
+          </div>
+          <div class="fg">
+            <label>Message</label>
+            <textarea name="message" rows="5" placeholder="Tell me about the opportunity..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+          <p id="formSuccess" class="fsuccess">
+            <i class="fas fa-circle-check"></i> Thank you! I'll get back to you within 24 hours.
+          </p>
+        </form>
+
       </div>
     </div>
   </section>
 
-  <!-- ══ CONTACT ═════════════════════════════════════════════════════════ -->
-  <section id="contact" class="contact-section">
-    <div class="container">
-      <h2 class="section-title">Connect With Me</h2>
-      <p class="contact-sub">Have a project in mind or want to discuss opportunities? I'd love to hear from you!</p>
-      <hr class="contact-hr"/>
-      <form class="contact-form" id="contact-form">
-        <div class="form-row">
-          <input type="text" name="firstName" placeholder="Your Name" required />
-          <input type="text" name="organization" placeholder="Organization Name" required />
-        </div>
-        <div class="form-row">
-          <input type="email" name="email" placeholder="Email Address" required />
-          <input type="tel" name="contact" placeholder="Contact Number" required />
-        </div>
-        <textarea name="message" placeholder="Write your message here..." rows="5" required></textarea>
-        <button type="submit">Send Message ✉</button>
-      </form>
-      <p id="responseMsg" class="response-ok">✅ Thank you! Your message has been recorded. I'll get back to you soon.</p>
-    </div>
-  </section>
-
-  <!-- ══ FOOTER ══════════════════════════════════════════════════════════ -->
+  <!-- ═══ FOOTER ════════════════════════════════════════════════════════ -->
   <footer class="footer">
-    <div class="footer-links">
-      <a href="https://github.com/RaviRanjanKumar-DA" target="_blank">GitHub</a>
-      <a href="https://www.linkedin.com/in/ravi-ranjan-data-analyst/" target="_blank">LinkedIn</a>
-      <a href="mailto:ravikumar.inbh@gmail.com">Email</a>
+    <div class="container footer-inner">
+      <div class="ft-brand">
+        <span class="nav-logo"><span class="logo-b">&lt;</span>RRK<span class="logo-b">/&gt;</span></span>
+        <p>Data Analyst · CRM Automation Specialist · Business Operations</p>
+      </div>
+      <div class="ft-nav">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="ft-soc">
+        <a href="https://github.com/RaviRanjanKumar-DA" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/ravi-ranjan-data-analyst/" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://wa.me/918851015209" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="mailto:ravikumar.inbh@gmail.com"><i class="fas fa-envelope"></i></a>
+      </div>
     </div>
-    <p>© 2025 Ravi Ranjan Kumar &nbsp;·&nbsp; Data &amp; Business Operations Analyst &nbsp;·&nbsp; New Delhi, India</p>
+    <div class="footer-btm">
+      <p>© 2025 Ravi Ranjan Kumar &nbsp;·&nbsp; Crafted with passion &nbsp;·&nbsp; New Delhi, India</p>
+    </div>
   </footer>
+
+  <button class="btt" id="backToTop" title="Back to top"><i class="fas fa-chevron-up"></i></button>
 
   <script src="script.js"></script>
   <script>
-    // ── Contact form submission ────────────────────────────────────────────
-    const form = document.getElementById("contact-form");
-    const responseMsg = document.getElementById("responseMsg");
-    form.addEventListener("submit", async (e) => {
+    const cForm = document.getElementById("contactForm");
+    const cSucc  = document.getElementById("formSuccess");
+    cForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const jsonData = {};
-      new FormData(form).forEach((v, k) => { jsonData[k] = v; });
-      const scriptURL = "https://script.google.com/macros/s/AKfycbxNUz32ZNDwxpwxq3zGxWiwtrDiOMVRB_HTQVz5JFcGWZ8vxasn88P21G94w06aCpc/exec";
-      try {
-        const res = await fetch(scriptURL, {
-          method: "POST",
-          body: JSON.stringify(jsonData),
-          headers: { "Content-Type": "application/json" }
-        });
-        if (res.ok) { responseMsg.style.display = "block"; form.reset(); }
+      const d={};
+      new FormData(cForm).forEach((v,k)=>{d[k]=v;});
+      const url="https://script.google.com/macros/s/AKfycbxNUz32ZNDwxpwxq3zGxWiwtrDiOMVRB_HTQVz5JFcGWZ8vxasn88P21G94w06aCpc/exec";
+      try{
+        const r=await fetch(url,{method:"POST",body:JSON.stringify(d),headers:{"Content-Type":"application/json"}});
+        if(r.ok){cSucc.style.display="flex";cForm.reset();}
         else alert("Submission failed. Please try again.");
-      } catch (err) { alert("Error submitting form."); }
+      }catch{alert("Error submitting form.");}
     });
   </script>
 </body>
