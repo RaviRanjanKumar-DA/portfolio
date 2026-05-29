@@ -683,46 +683,82 @@
 
   <script src="script.js"></script>
   <script>
-    /* ── Contact form — CORS-safe Google Apps Script submission ───── */
+    /* ══════════════════════════════════════════════════════════════════
+       Contact Form — powered by FormSubmit.co
+       ▸ Sends email directly to ravikumar.inbh@gmail.com on every submission
+       ▸ No backend / server required — works on GitHub Pages
+       ▸ First submission triggers a one-time activation email from FormSubmit
+         → Click "Activate Form" in that email → all future submissions deliver instantly
+       ══════════════════════════════════════════════════════════════════ */
     const cForm = document.getElementById("contactForm");
     const cSucc = document.getElementById("formSuccess");
 
     cForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      const cBtn = cForm.querySelector("button[type='submit']");
-      const origLabel = cBtn.innerHTML;
+      const cBtn     = cForm.querySelector("button[type='submit']");
+      const origHTML = cBtn.innerHTML;
 
-      // Loading state
-      cBtn.disabled = true;
-      cBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
+      /* ── Loading state ───────────────────────────────────────────── */
+      cBtn.disabled  = true;
+      cBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>&nbsp; Sending…';
 
-      // Collect form data
-      const d = {};
-      new FormData(cForm).forEach((v, k) => { d[k] = v; });
+      /* ── Collect & shape form data ───────────────────────────────── */
+      const raw = {};
+      new FormData(cForm).forEach((v, k) => { raw[k] = v.trim(); });
 
-      const url = "https://script.google.com/macros/s/AKfycbxNUz32ZNDwxpwxq3zGxWiwtrDiOMVRB_HTQVz5JFcGWZ8vxasn88P21G94w06aCpc/exec";
+      const payload = {
+        name:         raw.firstName,
+        email:        raw.email,
+        phone:        raw.contact        || "Not provided",
+        organization: raw.organization   || "Not provided",
+        message:      raw.message,
+        /* FormSubmit special fields */
+        _subject:     `📩 Portfolio Enquiry from ${raw.firstName}`,
+        _template:    "table",      /* clean tabular email layout   */
+        _captcha:     "false",      /* disable built-in captcha     */
+        _replyto:     raw.email     /* reply-to sender's email      */
+      };
 
       try {
-        /* mode:'no-cors' is required when calling Google Apps Script from an
-           external domain (GitHub Pages). It sends the POST without a CORS
-           preflight. The response will be opaque (type = 'opaque') so we
-           cannot read r.ok — reaching this line means the data was delivered. */
-        await fetch(url, {
-          method:  "POST",
-          mode:    "no-cors",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body:    JSON.stringify(d)
-        });
+        /* ── FormSubmit AJAX endpoint ─────────────────────────────── */
+        const res = await fetch(
+          "https://formsubmit.co/ajax/ravikumar.inbh@gmail.com",
+          {
+            method:  "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept":       "application/json"
+            },
+            body: JSON.stringify(payload)
+          }
+        );
 
-        cSucc.style.display = "flex";
-        cForm.reset();
+        const result = await res.json();
+
+        if (result.success === "true" || result.success === true) {
+          /* ── Success ─────────────────────────────────────────────── */
+          cSucc.style.display = "flex";
+          cForm.reset();
+        } else {
+          throw new Error("FormSubmit returned non-success");
+        }
+
       } catch (err) {
-        /* Only genuine network failures reach here */
-        alert("Could not send message. Please email me directly:\nravikumar.inbh@gmail.com");
+        /* ── Fallback — open Gmail compose as last resort ─────────── */
+        const subject  = encodeURIComponent(`Portfolio Enquiry from ${raw.firstName}`);
+        const body     = encodeURIComponent(
+          `Name: ${raw.firstName}\nEmail: ${raw.email}\nPhone: ${raw.contact || '-'}\nOrganization: ${raw.organization || '-'}\n\nMessage:\n${raw.message}`
+        );
+        const gmailURL = `https://mail.google.com/mail/?view=cm&to=ravikumar.inbh@gmail.com&su=${subject}&body=${body}`;
+
+        if (confirm("Direct submission failed.\n\nClick OK to open Gmail and send your message manually.")) {
+          window.open(gmailURL, "_blank");
+        }
       } finally {
-        cBtn.disabled = false;
-        cBtn.innerHTML = origLabel;
+        /* ── Always restore button ───────────────────────────────── */
+        cBtn.disabled  = false;
+        cBtn.innerHTML = origHTML;
       }
     });
   </script>
