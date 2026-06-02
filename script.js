@@ -93,11 +93,11 @@
   if (!el) return;
 
   const phrases = [
-    "Data & Business Operations Analyst",
-    "CRM & Automation Specialist",
-    "Power BI · Metabase Dashboard Expert",
-    "Sales Operations Analyst",
-    "MIS & Process Automation Executive",
+    "Senior Data Analyst · 5+ Years of Experience",
+    "Designed 100+ Interactive Dashboards",
+    "CRM Automation & Business Intelligence Expert",
+    "Enabling Data-Driven Decision Making",
+    "Sales Operations & Reporting Automation Specialist",
   ];
 
   let pi = 0, ci = 0, del = false;
