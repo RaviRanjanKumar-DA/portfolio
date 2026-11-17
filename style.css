@@ -734,10 +734,11 @@ ul { list-style:none; }
   @keyframes packet-v { 0% { top:0; opacity:0 } 15% { opacity:1 } 85% { opacity:1 } 100% { top:calc(100% - 8px); opacity:0 } }
 }
 
+/* Reduced-motion: animations stay on (site owner's choice) but run gentler */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
-  .bg-canvas { display:none; }
-  .flow-link span { display:none; }
+  html { scroll-behavior:auto; }
+  .deco-card { animation-duration:12s; }
+  .flow.play .fn-ico { animation-duration:7s, 16s; }
 }
 
 /* ══ 3D HERO SCENE + 3D TILT CARDS ════════════════════════════════════ */

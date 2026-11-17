@@ -8,8 +8,8 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
 
 const canvas = document.getElementById("hero3d");
 const hero = document.getElementById("hero");
-// Reduced-motion users get a still 3D frame. "?motion=on" forces animation (for testing).
-const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches && !/[?&]motion=on/.test(location.search);
+// Reduced-motion users still get the animation, just slower (site owner's choice)
+const SLOW = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0.45 : 1;
 
 function webglOK() {
   try { const c = document.createElement("canvas"); return !!(window.WebGLRenderingContext && (c.getContext("webgl2") || c.getContext("webgl"))); }
@@ -144,7 +144,7 @@ function init() {
   const clock = new THREE.Clock();
   function frame() {
     if (!visible || document.hidden) { running = false; return; }
-    const t = reduce ? 6 : clock.getElapsedTime();
+    const t = clock.getElapsedTime() * SLOW;
     const grow = Math.min(1, t / 1.6), ease = 1 - Math.pow(1 - grow, 3);
 
     barMeshes.forEach((m) => {
@@ -172,7 +172,6 @@ function init() {
     camera.position.y += (-mouse.y * 4 + Math.cos(t * 0.08) * 1.5 - camera.position.y) * 0.04;
     camera.lookAt(0, 0, -6);
     renderer.render(scene, camera);
-    if (reduce) { running = false; return; } // still frame only
     requestAnimationFrame(frame);
   }
   function start2() { if (!running) { running = true; requestAnimationFrame(frame); } }

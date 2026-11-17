@@ -10,7 +10,7 @@
   if (!canvas) return;
   const ctx = canvas.getContext("2d");
 
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const SPEED = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0.4 : 1;
   let W, H, particles = [], mouse = { x: -999, y: -999 }, paused = false;
   const PARTICLE_COUNT = window.innerWidth < 768 ? 26 : 55;
   const MAX_DIST = 140;
@@ -24,8 +24,8 @@
   function Particle() {
     this.x  = Math.random() * W;
     this.y  = Math.random() * H;
-    this.vx = (Math.random() - 0.5) * 0.5;
-    this.vy = (Math.random() - 0.5) * 0.5;
+    this.vx = (Math.random() - 0.5) * 0.5 * SPEED;
+    this.vy = (Math.random() - 0.5) * 0.5 * SPEED;
     this.r  = Math.random() * 2.5 + 1;
     this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
   }
@@ -103,7 +103,6 @@
     "Sales Operations & Reporting Automation Specialist",
   ];
 
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { el.textContent = phrases[0]; return; }
   let pi = 0, ci = 0, del = false;
 
   function tick() {

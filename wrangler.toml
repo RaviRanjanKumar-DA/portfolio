@@ -5,5 +5,5 @@ compatibility_date = "2026-10-01"
 [[d1_databases]]
 binding = "DB"
 database_name = "portfolio-admin"
-database_id = "local-placeholder"
+database_id = "ce6eaaf1-afd0-4110-a23b-7a64963c6378"
 migrations_dir = "migrations"
