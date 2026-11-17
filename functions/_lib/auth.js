@@ -95,3 +95,27 @@ export async function currentHash(env) {
   const row = await env.DB.prepare("SELECT value FROM settings WHERE key = 'admin_pass_hash'").first();
   return row?.value || env.ADMIN_PASS_HASH || "";
 }
+
+const GLOBAL_MAX_FAILS = 100; // across all IPs per window (stops rotating-IP guessing)
+
+// Record the attempt FIRST, then count, so parallel requests cannot all slip under the limit.
+export async function registerAttempt(env, ip) {
+  const since = new Date(Date.now() - WINDOW_MIN * 60e3).toISOString();
+  await env.DB.prepare("INSERT INTO login_attempts (ip, created_at) VALUES (?, ?)").bind(ip, now()).run();
+  const [mine, all] = await env.DB.batch([
+    env.DB.prepare("SELECT COUNT(*) AS n, MIN(created_at) AS first FROM login_attempts WHERE ip = ? AND created_at > ?").bind(ip, since),
+    env.DB.prepare("SELECT COUNT(*) AS n FROM login_attempts WHERE created_at > ?").bind(since)
+  ]);
+  const r = mine.results[0];
+  if (r.n > MAX_FAILS || all.results[0].n > GLOBAL_MAX_FAILS) {
+    const retryAfter = Math.max(1, Math.ceil((new Date(r.first).getTime() + WINDOW_MIN * 60e3 - Date.now()) / 1000));
+    return { locked: true, retryAfter };
+  }
+  return { locked: false, retryAfter: 0 };
+}
+
+// Log out every session except the one making this request (used after a password change).
+export async function destroyOtherSessions(env, req) {
+  const token = readCookie(req);
+  await env.DB.prepare("DELETE FROM sessions WHERE token_hash != ?").bind(token ? await sha256(token) : "").run();
+}

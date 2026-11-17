@@ -62,13 +62,14 @@ export async function render(el) {
           e.preventDefault(); col.classList.remove("over");
           const id = Number(e.dataTransfer.getData("text/plain"));
           const a = apps.find((x) => x.id === id);
-          if (!a || a.status === col.dataset.status) return;
+          if (!a || a.status === col.dataset.status || a.pending) return;
+          a.pending = true;
           try {
             await put(`/api/applications/${id}`, { status: col.dataset.status });
             a.status = col.dataset.status;
             toast(`${a.company} → ${col.dataset.status.replace("_", " ")}`, "ok");
             paint();
-          } catch (err) { toast(err.message, "err"); }
+          } catch (err) { toast(err.message, "err"); } finally { a.pending = false; }
         };
       });
     }

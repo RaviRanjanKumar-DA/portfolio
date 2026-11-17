@@ -1,7 +1,7 @@
 // CV Builder: master CV editor · tailor for a job (AI or manual) · accuracy guard · ATS · diff · print to PDF · versions
 import { get, put, post, del, ai } from "../api.js";
 import { h, raw, $, $$, toast, busy, confirmBox, setActions } from "../ui.js";
-import { factGuard, cvToText } from "../../lib/factguard.js";
+import { factGuard, cvToText, normalizeCv } from "../../lib/factguard.js";
 import { atsCheck } from "../../lib/ats.js";
 import { renderCV } from "../../lib/cvrender.js";
 import { wordDiff } from "../../lib/diff.js";
@@ -20,7 +20,7 @@ export async function render(el) {
   if (q.get("app")) S.tab = "tailor";
   if (q.get("version")) {
     const v = await get(`/api/cv/versions/${q.get("version")}`);
-    Object.assign(S, { tab: "tailor", tailored: v.json, appId: v.application_id, template: v.template, versionLabel: v.label });
+    Object.assign(S, { tab: "tailor", tailored: normalizeCv(v.json) || clone(m.json), appId: v.application_id, template: v.template, versionLabel: v.label });
   }
   if (S.appId) S.jd = (await get(`/api/applications/${S.appId}`).catch(() => ({}))).jd_text || "";
   setActions("");
@@ -157,8 +157,10 @@ function tailorTab(body, el) {
   $("#tAi").onclick = (e) => busy(e.currentTarget, async () => {
     if (!S.jd.trim()) throw new Error("Pick an application or paste a job description");
     const r = await ai("tailor_cv", { application_id: S.appId, app: { jd_text: S.jd } });
-    if (!r.json?.experience) throw new Error("AI did not return a CV. Try again.");
-    S.tailored = r.json; S.versionLabel = "";
+    const cv = normalizeCv(r.json);
+    if (!cv || !cv.experience.length) throw new Error("The AI returned an invalid CV. Try again or switch model.");
+    S.tailored = cv; S.versionLabel = "";
+    if (r.mock) toast("Mock AI reply (local test mode)", "warn");
     work();
     toast(S.issues.length ? `${S.issues.length} accuracy issue(s) found — fix them before saving` : "Tailored CV passed the accuracy check ✓", S.issues.length ? "warn" : "ok", 6000);
   });

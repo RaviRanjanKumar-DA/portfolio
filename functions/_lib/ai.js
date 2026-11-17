@@ -98,7 +98,7 @@ function mockReply(task, input) {
     case "tailor_cv": {
       const cv = JSON.parse(JSON.stringify(input.cv || {}));
       for (const r of cv.experience || []) r.bullets = (r.bullets || []).slice().reverse();
-      cv.summary = "(MOCK tailored) " + (cv.summary || "");
+      // mock keeps the summary as-is (the UI shows a "mock" toast)
       // simulate an AI hallucination when the JD mentions Snowflake, so the accuracy guard can be seen working
       if (/snowflake/i.test(a.jd_text || "") && cv.skills?.[0]) cv.skills[0].items.push("Snowflake");
       return JSON.stringify(cv);

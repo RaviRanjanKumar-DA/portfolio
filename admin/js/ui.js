@@ -1,5 +1,6 @@
 // UI helpers: auto-escaping HTML templates, toasts, modals, clipboard, Gmail compose, downloads.
-import { esc } from "../lib/esc.js";
+import { esc, safeUrl } from "../lib/esc.js";
+export const safeHref = safeUrl;
 
 class Raw { constructor(s) { this.s = s; } toString() { return this.s; } }
 export const raw = (s) => new Raw(String(s ?? ""));

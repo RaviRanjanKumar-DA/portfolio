@@ -1,5 +1,5 @@
 import { get, put, post, del } from "../api.js";
-import { h, $, $$, setActions, statusChip, toast, confirmBox, copy, busy, dayToIso } from "../ui.js";
+import { h, $, $$, setActions, safeHref, statusChip, toast, confirmBox, copy, busy, dayToIso } from "../ui.js";
 import { STATUSES, PLATFORMS } from "../../lib/stats.js";
 import { fmtIST, istDate } from "../../lib/time.js";
 import { EVENT_ICON, eventText } from "./dashboard.js";
@@ -10,7 +10,7 @@ export async function render(el, { id }) {
     get(`/api/applications/${id}`), get(`/api/applications/${id}/events`), get(`/api/applications/${id}/documents`), get(`/api/cv/versions?application_id=${id}`)
   ]);
   setActions(h`
-    ${a.job_url ? h`<a class="btn" href="${a.job_url}" target="_blank" rel="noopener"><i class="fas fa-up-right-from-square"></i> Job link</a>` : ""}
+    ${safeHref(a.job_url) ? h`<a class="btn" href="${safeHref(a.job_url)}" target="_blank" rel="noopener"><i class="fas fa-up-right-from-square"></i> Job link</a>` : ""}
     <button class="btn" id="mailBtn"><i class="fas fa-envelope"></i> Email</button>
     <a class="btn" href="#/cv?app=${a.id}"><i class="fas fa-file-lines"></i> Tailor CV</a>`);
 
@@ -61,8 +61,9 @@ export async function render(el, { id }) {
 
   $$("#stepper button").forEach((b) => (b.onclick = async () => {
     if (b.dataset.s === a.status) return;
+    $$("#stepper button").forEach((x) => (x.disabled = true));
     try { await put(`/api/applications/${id}`, { status: b.dataset.s }); toast(`Status → ${b.dataset.s.replace("_", " ")}`, "ok"); render(el, { id }); }
-    catch (e) { toast(e.message, "err"); }
+    catch (e) { toast(e.message, "err"); $$("#stepper button").forEach((x) => (x.disabled = false)); }
   }));
   $("#f").onsubmit = (e) => {
     e.preventDefault();

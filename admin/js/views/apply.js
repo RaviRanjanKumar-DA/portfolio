@@ -200,9 +200,10 @@ export async function render(el) {
     const d = appData();
     if (!d.company || !d.role) throw new Error("Company and role are required");
     const body = { ...d, notes: $("#notes").value.trim() || null, follow_up_at: dayToIso($("#follow").value), match_score: state.matchScore ?? null };
+    if (!state.id && state.creating) await state.creating; // a create is already in flight: reuse it
     if (!state.id) {
-      const r = await post("/api/applications", { ...body, status: status || "saved" });
-      state.id = r.id;
+      state.creating = post("/api/applications", { ...body, status: status || "saved" });
+      try { state.id = (await state.creating).id; } finally { state.creating = null; }
     } else {
       await put(`/api/applications/${state.id}`, status ? { ...body, status } : body);
     }

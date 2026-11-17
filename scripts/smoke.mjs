@@ -131,6 +131,7 @@ await step("settings: AI key stored encrypted and only returned masked", async (
   const s = (await call("GET", "/api/settings")).data;
   assert.equal(s.ai_key_masked, "…abcd");
   assert.ok(!JSON.stringify(s).includes("sk-smoke"));
+  await call("PUT", "/api/settings", { ai_key: "" }); // remove the fake key again
 });
 
 await step("profile + CV master round-trip", async () => {
@@ -147,7 +148,9 @@ await step("public contact form saves to inbox (honeypot rejected)", async () =>
   assert.equal((await call("POST", "/api/contact", { name: "Bot", email: "b@x.com", message: "spam", botcheck: "1" })).status, 400);
   cookie = saved;
   const inbox = (await call("GET", "/api/messages")).data;
-  assert.ok(inbox.some((m) => m.message === "hello " + RUN));
+  const mine = inbox.find((m) => m.message === "hello " + RUN);
+  assert.ok(mine);
+  await call("DELETE", `/api/messages/${mine.id}`); // keep the inbox clean
 });
 
 await step("stats endpoint returns apps + events", async () => {
@@ -182,6 +185,46 @@ await step("AI: unknown task → 400; test endpoint works", async () => {
   assert.equal((await call("POST", "/api/ai/generate", { task: "hack" })).status, 400);
   const t = await call("POST", "/api/ai/test", {});
   assert.equal(t.data.ok, true);
+});
+
+await step("two simultaneous identical status changes → exactly one history entry (no 500)", async () => {
+  const c = await call("POST", "/api/applications", { company: `Race ${RUN}`, role: "DA", status: "applied" });
+  const id = c.data.id;
+  const [a, b] = await Promise.all([call("PUT", `/api/applications/${id}`, { status: "interview" }), call("PUT", `/api/applications/${id}`, { status: "interview" })]);
+  assert.ok([a.status, b.status].every((x) => x === 200 || x === 409), `${a.status},${b.status}`);
+  const ev = (await call("GET", `/api/applications/${id}/events`)).data.filter((e) => e.type === "status_change");
+  assert.equal(ev.length, 1);
+  // interleaved different changes: the stale one is rejected with 409 instead of logging a wrong transition
+  const stale = await call("PUT", `/api/applications/${id}`, { status: "offer" });
+  assert.equal(stale.status, 200);
+  await call("DELETE", `/api/applications/${id}`);
+});
+
+await step("status change on a deleted application → 404, not a server error", async () => {
+  const c = await call("POST", "/api/applications", { company: `Gone ${RUN}`, role: "DA" });
+  await call("DELETE", `/api/applications/${c.data.id}`);
+  assert.equal((await call("PUT", `/api/applications/${c.data.id}`, { status: "applied" })).status, 404);
+});
+
+await step("8 parallel wrong logins from one IP → at most 5 get a 401 (rest 429)", async () => {
+  const ip = { "CF-Connecting-IP": `10.77.${Math.floor(Math.random() * 250)}.${Math.floor(Math.random() * 250)}` };
+  const saved = cookie;
+  const rs = await Promise.all(Array.from({ length: 8 }, () => call("POST", "/api/auth/login", { username: USER, password: "nope" }, ip)));
+  cookie = saved;
+  assert.ok(rs.filter((r) => r.status === 401).length <= 5, rs.map((r) => r.status).join(","));
+});
+
+await step("changing the password logs out other sessions", async () => {
+  const mine = cookie;
+  cookie = "";
+  await call("POST", "/api/auth/login", { username: USER, password: PASS }, { "CF-Connecting-IP": "10.2.2.2" });
+  const other = cookie;
+  cookie = mine;
+  assert.equal((await call("POST", "/api/auth/password", { current: PASS, next: PASS })).status, 200);
+  assert.equal((await call("GET", "/api/auth/me")).status, 200, "current session must stay");
+  cookie = other;
+  assert.equal((await call("GET", "/api/auth/me")).status, 401, "other session must be logged out");
+  cookie = mine;
 });
 
 await step("logout clears session", async () => {

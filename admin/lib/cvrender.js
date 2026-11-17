@@ -1,12 +1,12 @@
 // Renders a structured CV as ATS-friendly HTML (single column, real text, standard headings).
-import { esc } from "./esc.js";
+import { esc, safeUrl } from "./esc.js";
 import { durationLabel } from "./duration.js";
 
-const link = (u, label) => (u ? `<a href="${esc(u)}">${esc(label || u.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""))}</a>` : "");
+const link = (u, label) => { const s = safeUrl(u); return s ? `<a href="${esc(s)}">${esc(label || s.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""))}</a>` : ""; };
 
 export function renderCV(cv = {}, template = "classic") {
   const h = cv.header || {};
-  const contacts = [esc(h.phone), h.email ? `<a href="mailto:${esc(h.email)}">${esc(h.email)}</a>` : "", esc(h.location), link(h.linkedin, "LinkedIn"), link(h.github, "GitHub"), link(h.portfolio, "Portfolio")].filter(Boolean).join(" · ");
+  const contacts = [esc(h.phone), h.email ? `<a href="${esc(safeUrl("mailto:" + h.email))}">${esc(h.email)}</a>` : "", esc(h.location), link(h.linkedin, "LinkedIn"), link(h.github, "GitHub"), link(h.portfolio, "Portfolio")].filter(Boolean).join(" · ");
   const sec = (title, body) => (body ? `<section><h2>${title}</h2>${body}</section>` : "");
   const exp = (cv.experience || []).map((r) => `
     <div class="cv-role">

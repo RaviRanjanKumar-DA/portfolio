@@ -10,7 +10,11 @@ const BASE = "You help Ravi Ranjan Kumar, a Data Analyst in New Delhi, apply for
 const cvText = (cv) => JSON.stringify(cv || {}, null, 0).slice(0, 14000);
 const jobBlock = (app = {}) =>
   `JOB:\nCompany: ${app.company || "-"}\nRole: ${app.role || "-"}\nLocation: ${app.location || "-"}\nContact: ${app.contact_name || "-"}\nDescription:\n${String(app.jd_text || "-").slice(0, 8000)}`;
-const profBlock = (p = {}) => `PROFILE:\n${JSON.stringify(p).slice(0, 4000)}`;
+// CTC is private: only included when the user's own prompt asks about pay
+const profBlock = (p = {}, allowCtc = false) => {
+  const { current_ctc, expected_ctc, ...rest } = p;
+  return `PROFILE:\n${JSON.stringify(allowCtc ? p : rest).slice(0, 4000)}`;
+};
 
 export function buildPrompt(task, input = {}) {
   const { app = {}, profile = {}, cv = {}, template = {}, prompt = "", mode = "improve" } = input;
@@ -49,6 +53,6 @@ export function buildPrompt(task, input = {}) {
         user: `MASTER_CV:\n${cvText(cv)}\n\n${jobBlock(app)}\n\nReturn the tailored CV JSON (same keys: header, summary, experience[{title,company,location,client,start,end,bullets}], skills[{group,items}], projects, education, certifications, achievements).` };
     case "free":
     default:
-      return { json: false, system: BASE, user: `${prompt}\n\n${profBlock(profile)}${app.company ? "\n\n" + jobBlock(app) : ""}` };
+      return { json: false, system: BASE, user: `${prompt}\n\n${profBlock(profile, /\b(ctc|salary|package|compensation|pay)\b/i.test(prompt))}${app.company ? "\n\n" + jobBlock(app) : ""}` };
   }
 }
