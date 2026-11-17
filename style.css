@@ -763,3 +763,5 @@ ul { list-style:none; }
 .fn-ico { transform-style:preserve-3d; }
 .flow.play .fn-ico { animation:node-pulse 3.5s ease-in-out infinite, spin3d 8s linear infinite; }
 @keyframes spin3d { from { transform:rotateY(0) } to { transform:rotateY(360deg) } }
+
+.tl-legal { color:var(--text3); font-size:12px; }

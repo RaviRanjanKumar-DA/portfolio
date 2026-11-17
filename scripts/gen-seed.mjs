@@ -19,7 +19,7 @@ export const cv = {
     "Results-driven Data & Business Operations Analyst with 5+ Years of Professional Experience (including 3+ Years as a dedicated Data Analyst) spanning CRM management, workflow automation, business intelligence, and sales operations. Proven track record of designing and delivering 100+ interactive dashboards across Power BI, Metabase, Tableau & Looker Studio — automating reporting pipelines and driving a 40% improvement in sales team productivity through strategic CRM implementation. Adept at leveraging n8n, Pabbly, Claude AI, and SQL to deliver measurable business impact.",
   experience: [
     {
-      title: "Data Analyst", company: "The Batraa Numerology", location: "New Delhi, India", client: "",
+      title: "Data Analyst", company: "The Batraa Numerology (Batra Numerro Pvt. Ltd.)", location: "New Delhi, India", client: "",
       start: "May 2025", end: "Present",
       bullets: [
         "Spearhead end-to-end lead management operations for Sales & Business Development teams across multi-product lines: Elite Diamond, Business Software, Vastu Platinum, Akashic Awakening, Logo Consultation & Ratnakrit e-commerce (crystals, rudraksha, bracelets, Dhan Varsha Yantra).",
@@ -30,7 +30,12 @@ export const cv = {
         "Developed customer segmentation models based on product affinity and service tier, enabling targeted lead nurturing and improved customer lifecycle management.",
         "Prepared and distributed daily, weekly, and monthly MIS reports to drive data-informed decision-making across management and operations teams.",
         "Managed payment tracking for premium product bookings, ensuring accurate financial reconciliation and real-time revenue reporting.",
-        "Improved overall business process efficiency by 8–10% through structured SOP creation, process documentation, and cross-team operational guidance."
+        "Improved overall business process efficiency by 8–10% through structured SOP creation, process documentation, and cross-team operational guidance.",
+        "Built a 16-page Business Performance Report in Power BI — period slicers, 13-month & 90-day trend views, click-to-filter drill-down and ad-spend vs. lead analysis by category — validated with automated DAX tests and click-tests on every visual.",
+        "Designed a Social Media lead-funnel dashboard matching Google Sheets lead funnels to MySQL transactions for L2/L3 conversion tracking; fixed blank-row over-counting and de-duplicated revenue per lead.",
+        "Built a product-to-product Conversion Dashboard on MySQL transaction data with customer de-duplication (email + phone) and duplicate-transaction detection, cross-verified in DuckDB and refreshed automatically every day.",
+        "Engineered read-only data pipelines from Shiprocket and WATI (WhatsApp) into MySQL — orders, shipments, returns, tracking, broadcasts, templates and button-click analytics — with order-line master tables for reporting.",
+        "Developed internal data tools on MySQL: TBN Gallary team portal (knowledge base, role-based access, customer software-access lookup, embedded dashboards), HR Portal, and Logo/Vastu Desk CRMs with lead assignment, two-way Google Sheets sync and team dashboards."
       ]
     },
     {
@@ -65,7 +70,7 @@ export const cv = {
   ],
   skills: [
     { group: "BI & Analytics", items: ["Power BI", "Tableau", "Metabase", "Looker Studio", "Advanced Excel", "Google Sheets"] },
-    { group: "Programming & Data", items: ["SQL", "Python", "SQL Server", "Amazon S3", "SSIS", "GitHub"] },
+    { group: "Programming & Data", items: ["SQL", "Python", "SQL Server", "MySQL", "DuckDB", "Amazon S3", "SSIS", "GitHub"] },
     { group: "Automation & AI", items: ["n8n", "Pabbly", "Claude AI", "ChatGPT", "Apps Script"] },
     { group: "CRM & Operations", items: ["TeleCRM", "CallerDesk", "Smartflo", "Lead Management", "Sales Operations", "SOP Documentation", "MIS Reporting"] }
   ],

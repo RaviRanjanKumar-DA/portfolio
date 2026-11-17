@@ -257,7 +257,7 @@
               <div class="tl-left">
                 <span class="tl-now"><i class="fas fa-circle"></i> Current</span>
                 <h3>Data Analyst</h3>
-                <p class="tl-co"><img src="icons/TBN.jpg" alt="The Batraa Numerology" class="tl-logo"> The Batraa Numerology &nbsp;·&nbsp; New Delhi, India</p>
+                <p class="tl-co"><img src="icons/TBN.jpg" alt="The Batraa Numerology" class="tl-logo"> The Batraa Numerology <span class="tl-legal">(Batra Numerro Pvt. Ltd.)</span> &nbsp;·&nbsp; New Delhi, India</p>
               </div>
               <span class="tl-date"><i class="fas fa-calendar"></i> May 2025 – Present</span>
             </div>
@@ -271,11 +271,17 @@
               <li>Prepared and distributed <strong>daily, weekly, and monthly MIS reports</strong> to drive data-informed decision-making across management and operations teams.</li>
               <li>Managed <strong>payment tracking for premium product bookings</strong>, ensuring accurate financial reconciliation and real-time revenue reporting.</li>
               <li>Improved overall business process efficiency by <strong>8–10%</strong> through structured SOP creation, process documentation, and cross-team operational guidance.</li>
+              <li>Built a <strong>16-page Business Performance Report in Power BI</strong> — period slicers, 13-month &amp; 90-day trend views, click-to-filter drill-down and ad-spend vs. lead analysis by category — validated with automated DAX tests and click-tests on every visual.</li>
+              <li>Designed a <strong>Social Media lead-funnel dashboard</strong> matching Google Sheets lead funnels to MySQL transactions for L2/L3 conversion tracking; fixed blank-row over-counting and de-duplicated revenue per lead.</li>
+              <li>Built a <strong>product-to-product Conversion Dashboard</strong> on MySQL transaction data with customer de-duplication (email + phone) and duplicate-transaction detection, cross-verified in DuckDB and refreshed automatically every day.</li>
+              <li>Engineered read-only <strong>data pipelines from Shiprocket and WATI (WhatsApp) into MySQL</strong> — orders, shipments, returns, tracking, broadcasts, templates and button-click analytics — with order-line master tables for reporting.</li>
+              <li>Developed <strong>internal data tools on MySQL</strong>: TBN Gallary team portal (knowledge base, role-based access, customer software-access lookup, embedded dashboards), HR Portal, and Logo/Vastu Desk CRMs with lead assignment, two-way Google Sheets sync and team dashboards.</li>
             </ul>
             <div class="tl-tags">
               <span>Power BI</span><span>Metabase</span><span>Looker Studio</span><span>n8n</span>
               <span>Pabbly</span><span>TeleCRM</span><span>CallerDesk</span><span>Smartflo</span>
-              <span>Claude AI</span><span>MIS Reporting</span>
+              <span>Claude AI</span><span>MIS Reporting</span><span>MySQL</span><span>DuckDB</span>
+              <span>Shiprocket</span><span>WATI</span><span>Apps Script</span>
             </div>
           </div>
         </div>
@@ -369,6 +375,8 @@
             <div class="sk-chip"><img src="icons/sql.png" alt="SQL"><span>SQL</span></div>
             <div class="sk-chip"><img src="icons/python.png" alt="Python"><span>Python</span></div>
             <div class="sk-chip"><i class="fas fa-server" style="color:#3b82f6"></i><span>SQL Server</span></div>
+            <div class="sk-chip"><i class="fas fa-database" style="color:#06b6d4"></i><span>MySQL</span></div>
+            <div class="sk-chip"><i class="fas fa-feather" style="color:#f59e0b"></i><span>DuckDB</span></div>
             <div class="sk-chip"><i class="fab fa-aws" style="color:#f59e0b"></i><span>Amazon S3</span></div>
             <div class="sk-chip"><i class="fas fa-shuffle" style="color:#8b5cf6"></i><span>SSIS</span></div>
             <div class="sk-chip"><i class="fab fa-github" style="color:#e2e8f0"></i><span>GitHub</span></div>
@@ -554,6 +562,36 @@
           <h3>Attendance &amp; Leave Tracker</h3>
           <p>Automated attendance management with leave tracking, event reminders, and MIS reporting via Google Sheets and Claude AI.</p>
           <div class="proj-tags"><span>Google Sheets</span><span>Claude AI</span><span>Automation</span></div>
+        </div>
+
+        <div class="proj-card reveal">
+          <div class="proj-top">
+            <div class="proj-icon-wrap" style="background:linear-gradient(135deg,#1B2390,#3b82f6)"><i class="fas fa-chart-column"></i></div>
+            <span class="proj-badge">Power BI · 16 pages</span>
+          </div>
+          <h3>Business Performance Report</h3>
+          <p>Leadership report with period slicers, 13-month &amp; 90-day trends, click-to-filter drill-down and ad-spend vs. leads — every visual auto-tested with DAX.</p>
+          <div class="proj-tags"><span>Power BI</span><span>DAX</span><span>Calc Groups</span></div>
+        </div>
+
+        <div class="proj-card reveal">
+          <div class="proj-top">
+            <div class="proj-icon-wrap" style="background:linear-gradient(135deg,#f59e0b,#10b981)"><i class="fas fa-arrows-turn-to-dots"></i></div>
+            <span class="proj-badge">MySQL · DuckDB</span>
+          </div>
+          <h3>Conversion &amp; Funnel Analytics</h3>
+          <p>Product-to-product conversion engine and L2/L3 social-media funnel with customer de-duplication, duplicate-transaction detection and daily auto-refresh.</p>
+          <div class="proj-tags"><span>MySQL</span><span>DuckDB</span><span>Power BI</span></div>
+        </div>
+
+        <div class="proj-card reveal">
+          <div class="proj-top">
+            <div class="proj-icon-wrap" style="background:linear-gradient(135deg,#22c55e,#06b6d4)"><i class="fas fa-truck-fast"></i></div>
+            <span class="proj-badge">Data Pipelines</span>
+          </div>
+          <h3>Shiprocket &amp; WATI → MySQL</h3>
+          <p>Read-only API sync of orders, shipments, returns, tracking and WhatsApp broadcast/button analytics into MySQL master tables that feed dashboards.</p>
+          <div class="proj-tags"><span>APIs</span><span>Python</span><span>MySQL</span></div>
         </div>
 
       </div>
