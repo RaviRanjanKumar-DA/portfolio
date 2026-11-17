@@ -22,7 +22,7 @@ npx wrangler d1 migrations apply portfolio-admin --remote
 ```bash
 npm run build
 npx wrangler pages project create rrk-portfolio --production-branch main
-node scripts/hash-password.mjs "<choose-a-strong-password>"
+node scripts/hash-password.mjs "<your admin password>"
 ```
 `hash-password.mjs` prints the password hash. Then set the three secrets (each command asks for the value):
 ```bash
@@ -31,7 +31,7 @@ npx wrangler pages secret put ADMIN_PASS_HASH --project-name rrk-portfolio
 npx wrangler pages secret put ENC_KEY --project-name rrk-portfolio
 ```
 Values for each secret:
-- `ADMIN_USER`: your login name, e.g. `ravi`.
+- `ADMIN_USER`: `ravikumar.inbh@gmail.com` (the admin login email).
 - `ADMIN_PASS_HASH`: the hash printed by `hash-password.mjs`.
 - `ENC_KEY`: a random key. Generate one with:
   ```bash

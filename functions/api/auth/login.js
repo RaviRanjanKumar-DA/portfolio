@@ -13,7 +13,7 @@ export async function onRequestPost({ request, env }) {
   const ok = username.trim().toLowerCase() === env.ADMIN_USER.toLowerCase() && (await verifyPassword(String(password), hash));
   if (!ok) {
     await recordFailure(env, ip);
-    return err(401, "Wrong username or password");
+    return err(401, "Wrong email or password");
   }
   await clearFailures(env, ip);
   await env.DB.prepare("DELETE FROM sessions WHERE expires_at < ?").bind(new Date().toISOString()).run();

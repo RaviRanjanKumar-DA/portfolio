@@ -32,8 +32,8 @@ export async function render(el) {
       <div class="card"><h3><i class="fas fa-key"></i> Change password</h3>
         <form class="form" id="pw">
           <label class="f">Current password<input class="in" type="password" name="current" autocomplete="current-password" required></label>
-          <label class="f">New password (min 10 characters)<input class="in" type="password" name="next" minlength="10" autocomplete="new-password" required></label>
-          <label class="f">Repeat new password<input class="in" type="password" name="next2" minlength="10" autocomplete="new-password" required></label>
+          <label class="f">New password (min 8 characters)<input class="in" type="password" name="next" minlength="8" autocomplete="new-password" required></label>
+          <label class="f">Repeat new password<input class="in" type="password" name="next2" minlength="8" autocomplete="new-password" required></label>
           <div><button class="btn primary"><i class="fas fa-lock"></i> Update password</button></div>
         </form>
       </div>

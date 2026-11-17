@@ -1,11 +1,12 @@
 // End-to-end API smoke test against the local dev server (npm run dev).
-// Usage: node scripts/smoke.mjs [baseUrl]   — reads the local password from .dev.vars
+// Usage: SMOKE_PASSWORD=... node scripts/smoke.mjs [baseUrl]
 import { readFileSync } from "node:fs";
 import assert from "node:assert/strict";
 
 const BASE = process.argv[2] || "http://localhost:8790";
 const vars = readFileSync(".dev.vars", "utf8");
-const PASS = vars.match(/admin: (\S+)/)[1];
+const PASS = process.env.SMOKE_PASSWORD || (vars.match(/admin: (\S+)/) || [])[1];
+if (!PASS) { console.error("Set SMOKE_PASSWORD to the local admin password"); process.exit(1); }
 const USER = vars.match(/^ADMIN_USER=(.+)$/m)[1].trim();
 const RUN = Date.now().toString(36);
 let cookie = "";

@@ -28,6 +28,6 @@ npm run dev             # http://localhost:8790  (admin at /admin/)
 npm test                # unit tests
 npm run smoke           # API end-to-end test (with dev server running)
 ```
-`.dev.vars` (git-ignored) holds the local admin user, password hash, encryption key and `AI_MOCK=1`. Its first line is a comment with the local password.
+`.dev.vars` (git-ignored) holds the local admin email (`ADMIN_USER`), password hash, encryption key and `AI_MOCK=1`. Run the smoke test with `SMOKE_PASSWORD=<your password> npm run smoke`.
 
 Deploying: see [docs/DEPLOY.md](docs/DEPLOY.md).
