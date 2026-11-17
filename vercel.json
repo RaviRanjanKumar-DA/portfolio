@@ -1,0 +1,5 @@
+{
+  "installCommand": "echo no-install",
+  "buildCommand": "node scripts/build.mjs",
+  "outputDirectory": "dist"
+}
