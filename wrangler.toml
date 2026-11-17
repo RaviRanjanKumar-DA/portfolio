@@ -1,0 +1,9 @@
+name = "rrk-portfolio"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-10-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "portfolio-admin"
+database_id = "local-placeholder"
+migrations_dir = "migrations"

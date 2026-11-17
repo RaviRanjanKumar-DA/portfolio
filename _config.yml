@@ -1,0 +1,16 @@
+# GitHub Pages (Jekyll): publish only the public site + admin UI
+exclude:
+  - functions
+  - migrations
+  - scripts
+  - tests
+  - docs
+  - node_modules
+  - package.json
+  - package-lock.json
+  - wrangler.toml
+  - README.md
+include:
+  - _config.yml
+  - _headers
+  - dist
