@@ -118,7 +118,7 @@
   - `GET /api/backup` returns all tables as JSON; `POST /api/backup` imports, replacing everything inside a transaction batch.
   - `GET/PUT /api/settings` (the key is written encrypted, read masked).
   - `POST /api/contact` (public, length-limited, honeypot `botcheck`), `/api/messages[/:id]`.
-- [ ] Step 1: Write `scripts/smoke.mjs` (against `http://localhost:8788`). It covers:
+- [ ] Step 1: Write `scripts/smoke.mjs` (against `http://localhost:8790`). It covers:
   - login with a wrong password, 6 times → the 6th returns 429;
   - login OK (after clearing `login_attempts` for local) → cookie set;
   - create an application → change its status to `applied`, then `interview` → events list has `created`, 2× `status_change`, `applied_at` set;

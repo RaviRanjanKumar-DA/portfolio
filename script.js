@@ -10,8 +10,9 @@
   if (!canvas) return;
   const ctx = canvas.getContext("2d");
 
-  let W, H, particles = [], mouse = { x: -999, y: -999 };
-  const PARTICLE_COUNT = 55;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  let W, H, particles = [], mouse = { x: -999, y: -999 }, paused = false;
+  const PARTICLE_COUNT = window.innerWidth < 768 ? 26 : 55;
   const MAX_DIST = 140;
   const COLORS = ["#3b82f6", "#06b6d4", "#8b5cf6", "#f59e0b", "#10b981"];
 
@@ -78,10 +79,12 @@
       }
     }
 
-    requestAnimationFrame(draw);
+    if (!paused) requestAnimationFrame(draw);
   }
 
-  window.addEventListener("resize", () => { resize(); init(); });
+  let rt;
+  window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { resize(); init(); }, 150); });
+  document.addEventListener("visibilitychange", () => { paused = document.hidden; if (!paused) draw(); });
   window.addEventListener("mousemove", e => { mouse.x = e.clientX; mouse.y = e.clientY; });
 
   resize(); init(); draw();
@@ -100,6 +103,7 @@
     "Sales Operations & Reporting Automation Specialist",
   ];
 
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { el.textContent = phrases[0]; return; }
   let pi = 0, ci = 0, del = false;
 
   function tick() {
@@ -210,4 +214,33 @@
   btn.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
+})();
+
+/* ── 9. Animated flow diagrams (play when visible) ────────────────────── */
+(function initFlows() {
+  const flows = document.querySelectorAll("[data-flow]");
+  if (!flows.length) return;
+  const obs = new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add("play"); obs.unobserve(e.target); }
+  }), { threshold: 0.2 });
+  flows.forEach(f => obs.observe(f));
+})();
+
+/* ── 10. Timeline progress line ───────────────────────────────────────── */
+(function initTimelineProgress() {
+  const tl = document.querySelector(".timeline");
+  if (!tl) return;
+  function update() {
+    const r = tl.getBoundingClientRect();
+    const pct = Math.min(100, Math.max(0, ((window.innerHeight * 0.6 - r.top) / r.height) * 100));
+    tl.style.setProperty("--tl-progress", pct + "%");
+  }
+  window.addEventListener("scroll", update, { passive: true });
+  update();
+})();
+
+/* ── 11. Footer year ──────────────────────────────────────────────────── */
+(function () {
+  const y = document.getElementById("year");
+  if (y) y.textContent = new Date().getFullYear();
 })();
