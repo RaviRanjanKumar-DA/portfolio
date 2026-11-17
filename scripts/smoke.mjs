@@ -164,6 +164,25 @@ await step("backup export → import keeps counts and never contains secrets", a
   assert.equal(after.tables.templates.length, before);
 });
 
+await step("AI (mock): email_apply returns subject/body JSON", async () => {
+  const r = await call("POST", "/api/ai/generate", { task: "email_apply", input: { app: { company: "Acme", role: "BI Analyst" } } });
+  assert.equal(r.status, 200, JSON.stringify(r.data));
+  assert.match(r.data.json.subject, /BI Analyst/);
+});
+
+await step("AI (mock): tailor_cv always uses stored master CV and guard-demo adds Snowflake", async () => {
+  const r = await call("POST", "/api/ai/generate", { task: "tailor_cv", input: { cv: { experience: [] }, app: { jd_text: "Need Snowflake + Power BI" } } });
+  assert.equal(r.status, 200);
+  assert.equal(r.data.json.experience.length, 4);
+  assert.ok(r.data.json.skills[0].items.includes("Snowflake"));
+});
+
+await step("AI: unknown task → 400; test endpoint works", async () => {
+  assert.equal((await call("POST", "/api/ai/generate", { task: "hack" })).status, 400);
+  const t = await call("POST", "/api/ai/test", {});
+  assert.equal(t.data.ok, true);
+});
+
 await step("logout clears session", async () => {
   await call("POST", "/api/auth/logout");
   cookie = "";
