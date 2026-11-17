@@ -112,3 +112,14 @@ test("fmtIST and istDate format in Asia/Kolkata", () => {
   assert.equal(istDate("2026-11-17T20:00:00Z"), "2026-11-18");
   assert.equal(fmtIST(null), "—");
 });
+
+import { monthsBetween, durationLabel } from "../admin/lib/duration.js";
+test("durationLabel counts months inclusively like LinkedIn", () => {
+  assert.equal(monthsBetween("Aug 2018", "Nov 2020"), 28);
+  assert.equal(durationLabel("Aug 2018", "Nov 2020"), "2 yrs 4 mos");
+  assert.equal(durationLabel("Apr 2023", "Mar 2024"), "1 yr");
+  assert.equal(durationLabel("Mar 2024", "Mar 2025"), "1 yr 1 mo");
+  assert.equal(durationLabel("May 2025", "Present", new Date("2026-11-17T10:00:00Z")), "1 yr 7 mos");
+  assert.equal(durationLabel("Oct 2026", "Present", new Date("2026-11-17T10:00:00Z")), "2 mos");
+  assert.equal(durationLabel("bad", "x"), "");
+});

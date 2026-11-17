@@ -264,3 +264,43 @@
     card.addEventListener("pointerleave", () => { card.style.transform = ""; });
   });
 })();
+
+/* ── 13. Job durations + "experience at a glance" bars ────────────────── */
+(function initDurations() {
+  const MON = { jan:0, feb:1, mar:2, apr:3, may:4, jun:5, jul:6, aug:7, sep:8, oct:9, nov:10, dec:11 };
+  const now = new Date();
+  const nowIdx = (() => {
+    const p = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Kolkata", year: "numeric", month: "2-digit" }).formatToParts(now);
+    return +p.find(x => x.type === "year").value * 12 + (+p.find(x => x.type === "month").value) - 1;
+  })();
+  const parse = s => {
+    if (/present|current/i.test(s)) return nowIdx;
+    const m = s.trim().toLowerCase().match(/^([a-z]{3})[a-z]*\.?\s+(\d{4})$/);
+    return m && m[1] in MON ? +m[2] * 12 + MON[m[1]] : null;
+  };
+  const fmt = n => {
+    const y = Math.floor(n / 12), m = n % 12;
+    return [y ? y + (y > 1 ? " yrs" : " yr") : "", m ? m + (m > 1 ? " mos" : " mo") : ""].filter(Boolean).join(" ");
+  };
+  const rows = [];
+  document.querySelectorAll(".tl-item").forEach(item => {
+    const dateEl = item.querySelector(".tl-date");
+    if (!dateEl) return;
+    const [a, b] = dateEl.textContent.split(/[–-]/).map(x => x.trim());
+    const s = parse(a || ""), e = parse(b || "");
+    if (s === null || e === null || e < s) return;
+    const months = e - s + 1;
+    dateEl.insertAdjacentHTML("beforeend", ` <span class="tl-dur">· ${fmt(months)}</span>`);
+    const co = item.querySelector(".tl-co");
+    const name = co ? co.childNodes[co.childNodes.length > 1 ? 1 : 0].textContent.split("·")[0].trim() : "";
+    rows.push({ title: item.querySelector("h3")?.textContent.trim() || "", company: name, months, current: /present/i.test(b || ""), logo: co?.querySelector("img")?.getAttribute("src") || "" });
+  });
+  const box = document.getElementById("tlSummary");
+  if (!box || !rows.length) return;
+  const total = rows.reduce((t, r) => t + r.months, 0);
+  const max = Math.max(...rows.map(r => r.months));
+  const esc = s => s.replace(/[&<>"]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" })[c]);
+  box.innerHTML = `<div class="tls-head"><span><i class="fas fa-hourglass-half"></i> Experience at a glance</span><b>${fmt(total)} total</b></div>` +
+    rows.map(r => `<div class="tls-row"><div class="tls-name">${r.logo ? `<img src="${esc(r.logo)}" alt="">` : ""}<div><b>${esc(r.company)}</b><small>${esc(r.title)}${r.current ? " · Current" : ""}</small></div></div>
+      <div class="tls-bar"><span style="--w:${(r.months / max * 100).toFixed(1)}%"${r.current ? ' class="cur"' : ""}></span></div><div class="tls-dur">${fmt(r.months)}</div></div>`).join("");
+})();
