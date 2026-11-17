@@ -1,0 +1,32 @@
+/* CV layouts (used in the on-screen preview and for Print → Save as PDF, A4). */
+#print-area { display:none; }
+.cv { font-family:Calibri, "Segoe UI", Arial, sans-serif; color:#111; font-size:10.5pt; line-height:1.38; }
+.cv a { color:inherit; text-decoration:none; }
+.cv header { margin-bottom:8px; }
+.cv h1 { font-size:21pt; margin:0; letter-spacing:.3px; font-family:inherit; }
+.cv .cv-title { font-size:11pt; color:#333; margin-top:2px; }
+.cv .cv-contact { font-size:9.5pt; color:#333; margin-top:4px; }
+.cv section { margin-top:10px; break-inside:auto; }
+.cv h2 { font-size:11pt; text-transform:uppercase; letter-spacing:1px; margin:0 0 5px; padding-bottom:3px; border-bottom:1.2px solid #222; font-family:inherit; }
+.cv p { margin:0; }
+.cv ul { margin:3px 0 0 16px; padding:0; }
+.cv li { margin:1.5px 0; }
+.cv .cv-role { margin-bottom:8px; break-inside:avoid-page; }
+.cv .cv-rh { display:flex; justify-content:space-between; gap:12px; }
+.cv .cv-dates { white-space:nowrap; font-size:9.8pt; color:#333; }
+.cv .cv-dur, .cv .cv-muted { color:#555; font-size:9.3pt; }
+.cv .cv-client { font-size:9.6pt; color:#333; font-style:italic; }
+.cv .cv-skill, .cv .cv-proj { margin:2px 0; }
+
+.cv-modern header { border-left:5px solid #1d4ed8; padding-left:12px; }
+.cv-modern h1 { color:#0f2a6b; }
+.cv-modern .cv-title { color:#1d4ed8; font-weight:600; }
+.cv-modern h2 { color:#1d4ed8; border-bottom-color:#93c5fd; }
+.cv-modern .cv-role b { color:#0f2a6b; }
+
+@media print {
+  @page { size:A4; margin:12mm 13mm; }
+  body.print-cv > *:not(#print-area) { display:none !important; }
+  body.print-cv { background:#fff !important; }
+  body.print-cv #print-area { display:block; }
+}

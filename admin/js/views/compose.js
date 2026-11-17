@@ -26,7 +26,8 @@ export async function composeEmail(app, { task = "email_apply", kinds = ["email"
     <label class="f">Body<textarea class="in" id="cBody" rows="10"></textarea></label>
     <p class="tiny">Gmail opens with everything filled in. Attach your tailored CV PDF there if needed, then press Send.</p>
   </div>`;
-  const p = modal({ title: `Email · ${app.company}`, body, actions: [{ label: "Cancel", value: null }, { label: "Copy", value: "copy" }, { label: "Open in Gmail", value: "gmail", cls: "primary" }] });
+  const read = (kind) => (root) => ({ kind, to: root.querySelector("#cTo").value.trim(), subject: root.querySelector("#cSub").value, body: root.querySelector("#cBody").value });
+  const p = modal({ title: `Email · ${app.company}`, body, actions: [{ label: "Cancel", value: null }, { label: "Copy", value: read("copy") }, { label: "Open in Gmail", value: read("gmail"), cls: "primary" }] });
   $("#cTpl").onchange = (e) => {
     const t = tpls.find((x) => String(x.id) === e.target.value);
     if (t) { $("#cSub").value = fillTemplate(t.subject || "", vars); $("#cBody").value = fillTemplate(t.body, vars); }
@@ -42,10 +43,8 @@ export async function composeEmail(app, { task = "email_apply", kinds = ["email"
     if (r.mock) toast("Mock AI reply (local test mode)", "warn");
   });
   if (tpls[0]) { $("#cTpl").value = tpls[0].id; $("#cTpl").dispatchEvent(new Event("change")); }
-  // read values before the modal closes
-  const vals = {};
-  document.querySelector(".modal").addEventListener("click", () => { vals.to = $("#cTo")?.value; vals.subject = $("#cSub")?.value; vals.body = $("#cBody")?.value; }, true);
-  const choice = await p;
+  const vals = (await p) || {};
+  const choice = vals.kind;
   if (choice === "gmail") {
     window.open(gmailUrl(vals), "_blank", "noopener");
     await logEvent(app.id, "email_opened", `Email opened in Gmail: "${vals.subject}"`);

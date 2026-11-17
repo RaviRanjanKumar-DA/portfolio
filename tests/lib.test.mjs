@@ -123,3 +123,24 @@ test("durationLabel counts months inclusively like LinkedIn", () => {
   assert.equal(durationLabel("Oct 2026", "Present", new Date("2026-11-17T10:00:00Z")), "2 mos");
   assert.equal(durationLabel("bad", "x"), "");
 });
+
+import { wordDiff } from "../admin/lib/diff.js";
+import { renderCV } from "../admin/lib/cvrender.js";
+test("wordDiff marks removed and added words and escapes HTML", () => {
+  const d = wordDiff("raised sales by 40%", "raised <b>revenue</b> by 40%");
+  assert.match(d, /<del>sales<\/del>/);
+  assert.match(d, /<ins>&lt;b&gt;revenue&lt;\/b&gt;<\/ins>/);
+});
+test("renderCV escapes content and shows role durations", () => {
+  const html = renderCV({ header: { name: "<x>" }, experience: [{ title: "DA", company: "Co", start: "Apr 2023", end: "Mar 2024", bullets: ["a<b"] }] });
+  assert.ok(html.includes("&lt;x&gt;"));
+  assert.ok(html.includes("a&lt;b"));
+  assert.ok(html.includes("(1 yr)"));
+});
+
+test("factGuard reports an invented skill only once (case-insensitive dedupe)", () => {
+  const t = clone(master);
+  t.skills[0].items.push("Snowflake");
+  const r = factGuard(master, t);
+  assert.equal(r.issues.filter((i) => i.fact.toLowerCase() === "snowflake").length, 1);
+});

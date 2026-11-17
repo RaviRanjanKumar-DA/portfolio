@@ -19,7 +19,8 @@ export function toast(msg, type = "info", ms = 3800) {
   setTimeout(() => el.remove(), ms);
 }
 
-export function modal({ title, body, actions = [{ label: "Close" }] }) {
+// actions: [{label, cls, value}] — value may be a function(root) evaluated before the modal closes (to read its inputs)
+export function modal({ title, body, actions = [{ label: "Close" }], onOpen }) {
   return new Promise((resolve) => {
     const bg = document.createElement("div");
     bg.className = "modal-bg";
@@ -30,11 +31,12 @@ export function modal({ title, body, actions = [{ label: "Close" }] }) {
     bg.addEventListener("click", (e) => {
       if (e.target === bg) return close(null);
       const b = e.target.closest("[data-i]");
-      if (b) { const a = actions[b.dataset.i]; close(a.value !== undefined ? a.value : a.label); }
+      if (b) { const a = actions[b.dataset.i]; close(typeof a.value === "function" ? a.value(bg) : a.value !== undefined ? a.value : a.label); }
     });
     document.addEventListener("keydown", onKey);
     document.body.appendChild(bg);
     bg.querySelector(".acts .btn:last-child")?.focus();
+    if (onOpen) onOpen(bg);
   });
 }
 

@@ -36,7 +36,13 @@ export function cvToText(cv = {}) {
 export function factGuard(master, tailored) {
   const issues = [];
   const add = (path, fact, kind) => {
-    if (!issues.some((i) => i.fact === fact && i.kind === kind)) issues.push({ path, fact, kind });
+    const f = norm(fact);
+    const dup = issues.findIndex((i) => norm(i.fact) === f && (i.kind === kind || (kind === "skill" && i.kind === "skill")));
+    if (dup === -1) issues.push({ path, fact, kind });
+    else {
+      if (String(fact) !== f) issues[dup].fact = fact; // keep the original spelling (e.g. "Snowflake")
+      if (/\]$/.test(path) && !/\]$/.test(issues[dup].path)) issues[dup].path = path; // keep the most precise path
+    }
   };
   const mText = cvToText(master);
   const mFacts = extractFacts(mText);
