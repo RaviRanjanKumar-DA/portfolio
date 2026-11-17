@@ -1,39 +1,33 @@
-# 🌐 Ravi Ranjan Kumar – Data Analyst Portfolio
+# Ravi Ranjan Kumar — Portfolio + Job Desk
 
-Welcome to my professional portfolio! I’m **Ravi Ranjan Kumar**, a passionate and results-driven **Data Analyst** with a strong foundation in **Economics** and hands-on experience in **data reconciliation**, **financial analysis**, **fraud prevention**, and **visualization**.
+**Live portfolio:** https://raviranjankumar-da.github.io/portfolio/
 
-## 📌 About Me
+Two parts in one repo:
 
-Hi, I'm Ravi Ranjan Kumar, a passionate Data Analyst with a background in Economics and hands-on experience in financial analysis, data reconciliation, fraud prevention, and data visualization.  
-I specialize in using tools like **SQL**, **Python**, **Power BI**, and **Tableau** to uncover actionable insights and support decision-making.  
-Over the years, I’ve worked with companies like **Paytm**, **Maral Overseas Ltd.**, and **AI Variant**, solving real-world data problems.  
-My goal is to simplify complex datasets and turn them into impactful business strategies.  
-I thrive in collaborative, dynamic team environments and strive for continuous learning and innovation.
+| Part | What | Where it runs |
+|---|---|---|
+| Public portfolio | `index.html`, `style.css`, `script.js`, `hero3d.js` (Three.js 3D scene), `icons/` | GitHub Pages, Vercel, Cloudflare Pages |
+| **Job Desk** admin | `admin/` (vanilla-JS app) + `functions/api/*` (Cloudflare Pages Functions) + D1 database | Cloudflare Pages only (needs the backend) |
 
-## 💼 Professional Sections
+## Job Desk features
+- **Login:** one admin, PBKDF2 password hash, 7-day HttpOnly session, lock after 5 wrong tries for 15 minutes.
+- **Dashboard:** KPIs, funnel, weekly trend, platform split, response rate by platform, follow-ups due.
+- **Applications:** table and Kanban board (drag to change status), filters, CSV export, full history (IST timestamps).
+- **Apply wizard:** paste a job description → AI fills company/role/recruiter → email via Gmail compose, or a portal message (Naukri/LinkedIn) copied for you → mark as applied, with a follow-up reminder. No Naukri/LinkedIn APIs.
+- **CV Builder:** master CV, AI tailoring per job, and an **accuracy guard** that blocks any number, date, employer, title, skill or degree not in the master CV. Also ATS keyword score, diff vs master, Classic/Modern A4 layouts, Save as PDF, and versions.
+- **Templates:** email, LinkedIn, Naukri, follow-up, thank-you and cover-letter templates, with `{{variables}}` and AI improve/shorten.
+- **AI Studio:** free-form AI help with presets.
+- **Inbox:** contact-form messages from the portfolio.
+- **Settings:** bring-your-own AI key (OpenAI, Claude, Gemini, Groq, OpenRouter), stored encrypted server-side; change password; JSON backup/restore.
 
-This portfolio includes the following sections:
+## Run locally
+```bash
+npm install
+npm run db:local        # create the local D1 database (first time)
+npm run dev             # http://localhost:8790  (admin at /admin/)
+npm test                # unit tests
+npm run smoke           # API end-to-end test (with dev server running)
+```
+`.dev.vars` (git-ignored) holds the local admin user, password hash, encryption key and `AI_MOCK=1`. Its first line is a comment with the local password.
 
-- **👤 About**
-- **🛠️ Skills** (with tool icons)
-- **💼 Professional Experience**
-- **🎓 Education**
-- **📊 Projects** (with live or GitHub links)
-- **📎 Other Details**
-
-## 🔧 Technical & Soft Skills
-
-### 📊 Technical Tools
-- SQL, Python, Power BI, Tableau, Excel
-
-### 💡 Soft Skills
-- Problem Solving & Critical Thinking  
-- Effective Communication  
-- Attention to Detail  
-- Time Management  
-- Collaboration & Teamwork  
-- Adaptability and Continuous Learning  
-- Leadership and Ownership Mindset  
-
-## 🔗 Live Portfolio --  https://raviranjankumar-da.github.io/portfolio/
-
+Deploying: see [docs/DEPLOY.md](docs/DEPLOY.md).
