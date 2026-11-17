@@ -244,3 +244,23 @@
   const y = document.getElementById("year");
   if (y) y.textContent = new Date().getFullYear();
 })();
+
+/* ── 12. 3D tilt on cards (mouse devices only) ─────────────────────────── */
+(function initTilt() {
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  document.querySelectorAll(".proj-card, .ach-card, .skill-block, .info-card, .edu-card").forEach(card => {
+    card.setAttribute("data-tilt", "");
+    if (getComputedStyle(card).position === "static") card.style.position = "relative";
+    const icon = card.querySelector(".ach-ico, .proj-icon-wrap, .sb-head i, .edu-ico");
+    if (icon) icon.classList.add("tilt-pop");
+    card.addEventListener("pointermove", e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      card.style.transform = `perspective(900px) rotateX(${(0.5 - y) * 10}deg) rotateY(${(x - 0.5) * 12}deg) translateY(-4px)`;
+      card.style.setProperty("--gx", x * 100 + "%");
+      card.style.setProperty("--gy", y * 100 + "%");
+    });
+    card.addEventListener("pointerleave", () => { card.style.transform = ""; });
+  });
+})();

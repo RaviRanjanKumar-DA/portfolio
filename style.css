@@ -739,3 +739,27 @@ ul { list-style:none; }
   .bg-canvas { display:none; }
   .flow-link span { display:none; }
 }
+
+/* ══ 3D HERO SCENE + 3D TILT CARDS ════════════════════════════════════ */
+.hero-3d { position:absolute; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; opacity:0; transition:opacity 1.2s ease; }
+.hero.has-3d .hero-3d { opacity:1; }
+.hero.has-3d .hero-deco { display:none; }
+.hero-content { position:relative; z-index:2; }
+.hero.has-3d::after { /* soft vignette so the text stays readable over the scene */
+  content:''; position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:radial-gradient(ellipse 46% 52% at 50% 48%, rgba(7,13,26,.78) 0%, rgba(7,13,26,.35) 60%, transparent 85%);
+}
+.scroll-hint { z-index:2; }
+
+[data-tilt] { transform-style:preserve-3d; will-change:transform; transition:transform .25s ease, box-shadow .25s ease, border-color var(--trans); }
+[data-tilt] .tilt-pop { transform:translateZ(28px); }
+[data-tilt]::after {
+  content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background:radial-gradient(circle at var(--gx,50%) var(--gy,50%), rgba(255,255,255,.12), transparent 55%);
+  opacity:0; transition:opacity .25s ease;
+}
+[data-tilt]:hover::after { opacity:1; }
+.proj-grid, .ach-grid, .skills-grid { perspective:1200px; }
+.fn-ico { transform-style:preserve-3d; }
+.flow.play .fn-ico { animation:node-pulse 3.5s ease-in-out infinite, spin3d 8s linear infinite; }
+@keyframes spin3d { from { transform:rotateY(0) } to { transform:rotateY(360deg) } }

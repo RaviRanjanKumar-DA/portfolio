@@ -85,7 +85,10 @@
   <!-- ═══ HERO ══════════════════════════════════════════════════════════ -->
   <section id="hero" class="hero">
 
-    <!-- Floating analytics decorations -->
+    <!-- 3D analytics scene (Three.js, see hero3d.js) -->
+    <canvas id="hero3d" class="hero-3d" aria-hidden="true"></canvas>
+
+    <!-- Floating analytics decorations (shown when 3D/WebGL is unavailable) -->
     <div class="hero-deco" aria-hidden="true">
       <div class="deco-card dc1">
         <div class="dc-label">Sales Productivity</div>
@@ -833,6 +836,7 @@
   <button class="btt" id="backToTop" title="Back to top"><i class="fas fa-chevron-up"></i></button>
 
   <script src="script.js"></script>
+  <script type="module" src="hero3d.js"></script>
   <script>
     /* ══════════════════════════════════════════════════════════════════
        Contact Form — Web3Forms API
